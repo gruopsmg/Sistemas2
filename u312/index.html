@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>
+  // Aplica o tema salvo antes da página desenhar, para não "piscar" o tema errado
+  try {
+    var temaSalvo = localStorage.getItem('unicar_tema');
+    if (temaSalvo === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  } catch (e) {}
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNICAR · Estoque de Pneus (rede local)</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAb8AAAG/CAMAAAD/zSlAAAABAlBMVEU3NDX////tMjf/8hL/9xDtKThKRjPX0Bv96RXwVTMyLzUvLTD/9RE0MTLtLjcdGBrvRzX/+w36zB7tHzkAAAAoJCXFuyDwXDErKTX93xb39/cuKiv2mCnsGiIjHyDtLTP1nqC8vLzc3Nz60tPtJyzs7Ow+Ozyop6frAADuR0tHREX72dp0c3PwdnqVlJReXFyBgIDMzMwVDxHydC75wR9UUlPxZTDrADpqaGj0kpTwYmXzfi0AADOUjCkkITf3uLnzgoX97OzrCBRgWyzxbXDzqav1jyoXFzGJgir3oyb81RrvVVmhmSN9dyns4RX5xMYQDzFRTS4/OzK1qyFpYyr4tCO5HGMDAAAgAElEQVR4nO2dCUObzNbHg4nV1kxiGrEKj1iohBpTsrRp0/apPtp9Ueu1/f5f5c7CDMsMBBJIiM7/vu+9Niwh82POmXPmMFSUuyJN02woyzQdx3HdQa/XmxDBvwauCz81TQvtAvdc9sXmpsqyL2BuabY1HJoOBNbv6qOdndGo2TQMVVV1X/BfhtFsjtBmvduHOB1zOLTs1ee4yvw0C3Ib9Cbjjg6RQV4AVKYLAMgTwlQ740lvADlaq0xxRflploP6WwfoqJ+lwSYAifqlDjqoPzqrCnHl+Gn20Ol11BHsbyBVf5veH+FNYIzUTs8Zrp5BXSV+EJ3p9qGtVLfyABfBuKU2m3rfNVcL4srwg91u0K80jRmNZUqIutGs9AewIy7756bVavCznN64g5xVgex8hioc2vQca9k/OpVKzw8azUEFO7sFsGMMkUusDFbAlJabn205E32kLhJdAKI60ieOVW5TWmJ+tulOQHNJ8CjCJpi4ZokRlpafCUcri3F4UxDqKhzRmMtujjiVk581QFmv5cMjAuhiBuUcz5SPn2a53R1j2cw4GTtdt4RJmrLxg5ECaJal44UFr6t8UUW5+A0HY32pA5ZkAVUfD4bLbqSQSsRPc8agxPCI4BWOnRKZ0bLwg15vVFK7GRVojsrjCcvBzzZ7hrEa9JCAYfRKEhSWgZ/tTIzSG86IVGPilIHg8vnZblfXl41jBul6110+wSXz06zBaIUMZ1jAGA2W7QiXyk8bDvTyRepZZOhLjieWyW846Kxs36MCRmepBJfHz5pUSpPhnEdAr0yWl5VZFj+rt3Mn6CEBfae3LILL4We5K+73ojJ0dzkEl8HPdror7/eiAkZ3KfHgEvg545WM96ZJ18fO4htz4fyGqz/mjBMciy58KLpgfjBcv6v0kMBo0dP0C+Vnu527NWzhZXQWm1RbJD9zfGdNpy9gjM0Ftuni+Fk99S4OW3jp6gKjwUXxsx1VXXbDLkyqurBYYkH8hr0VmVzPR6DZW9BIdDH83M796XxEasddSMsugp/VvTOpzvQCencRXrB4frbbvB/jlqj05gJCicL5DSf3IGgQCxiTwr1gwfw05955vqDUTtG1osXysyf30PMFBfRJsTa0UH7mPYr54qSqZpFNXCA/2925352PCOwUOYwpjp81ueu56rQyCqyPKYyf2bmfUYNIescsqpkL4qcNpO0MCOwMChqHFsNP2s6oirKhhfAzx3LcGZVazLRgEfycO1mfNK90vYjypvz52YN7NVWUXqA5yD+QyJ2fdH3xKsAJ5s1vKF1fgtRx3gntnPnJqC9ZuUeC+fJzVu0x6IULqPmOYvLkp7ly5DJVoOnmGcrnyE8bNJfdOCuhZp65mPz42T058Ewno5dfHJEbP6svB55ppfZziyPy4md1Jb70UnOrTcuJ3/Bel7lkl5rXk2b58Bt2ZdiXTXo3H4C58JP4sisngHnwM+V8wwzSdTOHts+B39DYWnZbrKR0I4ceOD8/syLxzSa9Yi6f37Aic2azaqsydw+cl59pSN83u3TDXC6/oS6N5zza0ufsgfPxk4HDvJo3jJiLnzWW+OaVPp4rlTYPP0smzXKQ2pkH4Bz8ZMo6H82VzJ6dn92X8335yOjPPh84Mz+tJ3tfXlJ7M8/Iz8pPG8jel5+MmUsqZuXnylqXPNWcdbWYGfk5El++as5YVjgbP1PWeeYsMONj8jPxG3YkvrwFZquomIWf1Zdpl/ylz1SUNgM/eyIjhyKkzrJUzAz8ZORQkIzBIvjJoWdhmmEQmpmfec9XxCpSIHtJU1Z+csqoSGWfTMrIT5Njl0KlTjIm0jLyk2OXgpV1DJONn7mz7N9357VjFsfPknmXwgWyTcdn4WdP5NileGVb8TULP1c6v0XIyDKXlIGfdH4LUhYXmJ6fLeeMFiSgpregqfnJyG9xyhAFpubnyLHL4pR+qcK0/OSU7SKVfjI3JT8557dYpZ4LTMlPhg4LVtogIh0/Sy5stmCBZro0TDp+8jGxhUvv5sfPlfgWLz2VBU3DT449l6F0Y9AU/Gz5pMpSpKZZpjAFP1mwtCSlKWeazs+Sec8lCajTx6DT+UnruTSpvfn5mRLf8jT9oZZp/GxZL7hE6eNpQ5hp/GTibKmamkabwk9WLC1XU6uZpvCT9Z5L1rR60GR+w9Gyr//ea5SchUnmJ63n0gU6s/NzpPVcvozELEwSP3ssu9/yBRJjiCR+smSpFEosZkrgZ8lZ21JIT1rfLoGfDN1LoqQgPp6fJR+ULomAHt8B4/nJ18GVRkb8PEQsP0s+rVIe7cR2wFh+8lm/EkmfZOUnX8tRJoHYF33E8RvI7lcm6XFp7Bh+smSwXIotJhTzk6sjl01xKyyL+cnYr2yKiwHF/GT3K51iJnKF/Gw5bVs+jYTTEEJ+MvNZQomzoCJ+dld6v/IJdEUdUMRPzvuVUsJ5QAE/uUxWOSVcWEvAz5Ter5wSvWyV5ydfTFVWiV5zxfOzZPcrqYDBx/A8Pxk8lFaCEILjp41k8FBWgRFnQDl+8mnpEot/oprjJ2t2SywwnsZvKPGVWSA6DRjlN5DBQ5mlRmchIvwsaT5LLRB9QUuEn0x9llzRJGiYn8y9lF3RHEyYnwWk+Sy3ALAS+Mm3gpdekTeNh/nJidvSC3Tj+clnHlZA4WchQvxk2dkKKFyIFuIng4dVkB7Hz5T8VkGhl+QG+clnVlZCoWdZAvzsvuS3CtL7tpCfKR/5WwmBiink58rc2WpIdUX8ZNnnqihYCOrzk7nPVVEwB+rzk4UvK6NAGQzjJ9+vuToKvJ+T8bPlI7crI6DbHD+51O4KyV+Ul/GThUsrJL+MifGTwfsKCVSi/ORTKysl9iQL5edI87lKUp0Iv55MvqyS9F6Yn1yqfLXEFjX3+Mn1zlZLbD20inR/KynqAAk/TUZ/KybVW8+O8JNT76smOglP+A1l8nPFBPRhgJ8p545WTU0zwG+2NSceIcmOuxx5a1Fgftos7u/R3v8+fvx4U9l7lP/FSU2V3tcYv1nm/vYefNi9gtr98L+9Ai5Paoq8OUDMb5jd/Z3+2ajWavV6rVbdeHBawPVJTVFzyPhlL305vbyqVat1qGq1dvVRAly8SBEM5pf5qemvl61atVbd3N/fhP9Tu/ojTejCpfYYv85WpiPB6SXqeK++PNnefv3P41odAvxa0FVKxWmrQ/lparbhy+m3ar22/77RXodqr31BAG+kCV2wgKp5/KxspUunl9VaffN1u7GG1Wi/h/+WPnDhGlkev2yvmf76DQ469x+215jaLzdryAc+kipOvInEL6ZG/DJNPqDeV9t/EsAHAb5HAC8fSBWnR1+jY0RchFbJWDvx9RvC9zqED5rQl616/WpDqjjt3n78Hc504RqKCsqepR++fL2EQ5fN1+trEbXft+AoRqpA1au3W6EuCFAGrYLeE56a3+m3Vj3g+xpQvg+EoXx1U6ogwYCtdfUxCBCg94pXMtS+4Livtkl9Hwwdth+urTd8H1jdfL/9UKoIvfy+X6vWNkDAhOIaGMjPTNv99r5dBXxfe/v74x8/Xn1ZW6c+EA9s3qxLFaH2wx+1auv2d7A/mZhf2jUjUc7T933tJ/vYLFd/rLEeGA0spHJU+yE0cNUHgQ6I1pKspA4fTi9rATzrL9HZkGqbaxQp/KwuGNxI5aL2P7Vq/UMgTYICiErKNT+h74NDl00f376HDwLcf0gBojgwGlxI5STYZer13UCiGa0FWkm3bgEgOU/m+177+CDAxwzgS0F0mKCjg4MD/Mch/N+DgyP058EB/fDA+4Tf9+DgkHx0dEj+xJ8dsa308ODxK6/1J/v12m5gBIrWMago1jgFP+z79n3ftxnABwH+2GY9MIsPPHx3dvYUN//Pz5+PPp+9g3/D//E+PHh7ffbigO579OL6+j+E4/AY7fET7frp7NPx2dPjQ/jZU/jZf2g3eMqzM3wU/OjpuwPxN6+ieH5jC/JLEz6cfgsmzdqvcawXBLgf9IE+6Ck6eKooCkJ19Ek5P1AUxOfoBH52coTwofmRT14POnqB/vX2CPHTvM/hHtfHyvm7I8gfHXUGT3XwH9rvOToEfaT9d3d6IMcPBRCQ3/TuF05ZB30fVesH3Qp9IDS0L1MBvDiDTXyMetI77fzgXHmB8Hw6Ua4/wc+enyifnymfL8iuh5+V68/K2Rrmd/70BToK8jt/h/mtrX06V65/rmF+Jy9eYGgnylN4irvTATl+FR3xm177Gc55tgX4kAn1AOLppJQ+8PmJdo57UoDf2vNr0ugXJ8p/ENoF2fXwTHn6CXY3wu/tJ4+f8tbj9/yZ8hbtivh9+uTx++/Z3ebXNCG/qcUvOOcZ6/s4H4iT2f5INUnPz89hIx+E+V3ARkc2NcxvDfJb+4R6GLKfGrWfyjOPHzzqKUKF7Oc5tZ+acv7pDttPVAJTmVq7i0ae9cDIM+r7RD4QAX8yFeDhmnICsVyk5UeGk4jfs+t3zENy/M6vyUEnCO6d5me4SmXKo0cwcKgLw3ZerWgcOM0HHv1E/FBjp+P37vrpGrGfP5+jPSG/k3Oe3/Vz3P0gPziqeXuX7ac60Cpa4uwf2Luc7vsCPpCa0FSB/AEeU548R4GEdr6maCF+cPzy9sz3f5+VzxDNGuH34hgf/1Y5E9jPZ8fHODo8Ud7dcX56D/JLrJ334j6KL8b3iXwg7LXTfCAMH87PlPMjGL/9PFdOfBKk/8FN56z9j96if5158cPJuef/zt4K7OfJyQU65B7w62sVO2n27zQ8dHmdjA/5wPVQIJ/sAy+ulbPjcxxAHL6Fg5K32FdRfofHMIB7Rt3X4fE1/NdPFv+hrgqZnh1Afp61fYptajD+e3dOoN4N8fxA164kPfvw9TI4XZvk+3yA2xkC+YPnB4cXz7GxO7iA/yGfXjz38mQXUId038OLgwPyr8PnUJjrETz+ubcLPeoIbSUHPD+iH94JCfjpkF9s8SD0fbV6Wt/H+cDMyezDqR8J9rhP4vlVRpBf7DtXTr9dhVLW03tfBGAaHyiVWgJ+O3Yl9p050elaD1+9zuqU6sJIsPaDxYE4ExMP8EikhM3408OjA4H4rnnobSFHiY4JRYaNxno7UbROJCJ4HJocj+4saP3k0wfUEH+TkJ9VMWPsZzTnuYmfN6peXV2hWjak3Y0r2EF5hq39bWZyN+u1zdhc6KcXvD4deygOj6ObP5GZiqcCvf0ZBXhE9/sPH/VZdNAxOwiOuh6+/PJPgr683hYRbGy/fvme6QsS2vs1t2vjSdLZg3r/RPhNYvtpxvH7GpquJb6vXt29/XVz+vVfqkcPLneveIC1YDI71gceHj9TBHpLJxzOuE3IAZKZBk4nx2GAh2vn3hYN/evoXHTQC9oD29tfHldbtVaSaj/+2eZvxPZ3uIWK7If+q7odJdB4vZl4+oDqP760RQDF/MTpz+h0Le59V7e7V9XbvZvLbx9+3e5ioV7Iu8VAIP+yFptKOxIBPPcaFUcPkU14LHkkBhjJkx29oMSuD2PvlWPvmPb7H7Xpvr1Wf7XGNWv7H6EPafE2Zz028ch/U+2vyIYK+DUdMb9wmS71fbe70OW1bm7hdfi1uvDTlgCg7wNbsT7waE3j2pR2JB8A07U3rf6TPwpuDPM7+Ew3kP589JM7nXJ+QfZ9870apsd6QpTK3zcpqbS+c3tCGya40Vmfi3z+XdBgMfwE6WsyXRvwfej0sPuhC2j9+hX+Xa3bW/IcbujDcBwYU9R08ZbnQPMtn7lNdCr2+bWAnxIyoIdrbB+vYx7w5yNTi4323win2t9tTxxAzoI21n6I+NV/8PzW3vzgAH73vuhl5C6oiwJnAT/DqfDTD6hMN4AvFPfBDrdxGflZrd3dK84NRuPAl6IeeME3qpfvCgCg0ugY5bnQbz69CJzYN7In3lECd0rItr9EAWxut0nJ5RuO35for1gX86tWBQbwDddVN8kjlOvQwEU3vefbS8TPrfBvzYnkPANxHxzA7FarNz5OL5jY/fPvh+hvZUVNDTKdJBrEPOd93E/P/fH2jlpWf2gSPjKYaTl6QW3sWbw7xfmA9YdRAND2e+3F979/oj8ChkhC1Z7wDvBhtPuxXrr+nuuZ3J0i5Ke6FW76KH66tn71cWtro/Y/5iCqm+SZo90/X684J1jb99x9I84HHq5xFE6OqPvjNn2mA9NPInxwNBkAePiUfurlP48+cdCfHZKmi1536zv96V84ftFesb4dk5OqcaTh6aK7stuBM+H1zfep7Kc6qESrP1GZbj3q+/A54VXd/g+6xtNvu7cf/txUTn8z7T262a1HLy9U2Ct6aonkmkM6u4gCYKIzCQKjS3gEOyC1vnT+9oj3tLjGba3xnbvx6NjxzWOuwSO/oLH+ih+7kd/+inOAbx5HbSRzp439yKY68z5T+PUqkem/vRsUkrNHVHzfV79C39ja2Nqq/P7336+ne4+2gtr7989GlGDAB37Bk0sRn3AR55MgP97cvfMs4aHQ/SnBqXbf+p7QpCn3VRrevbEdhVTf90zf+vZmFEp0VML3UB9ANNZobHOQqtR8PomSrb0ShPACfjrH7yuMBtjodz1gPGu7G4hgHfq6LbAl0NetXxuRYajvA9df1aC5CN9Thzwk5Yj6OL57HXqW9d05t43oM+Pnm1hv+lfg/sjApvGEg0SjPHTPhdWKjOrbT6pxIR3/GEE7Osastl5R88ndBvWU8QPkF66+fnSD7kDaUUIWZPPbBrqA2tWvr6ciflt7ew9+RRvjO3225UkNOsTwPSUgQSZehe7vjE3kisI/fDALIXwT6xndo3fc3tekTd7HNV1j/S9nPsNM1tc4AxtQdADS/s6Zzy/UUL/iziOKt0T8JhF+X3/Bdv7LDgj+uJZHp966+nO6Jyb49SZ8JTV2K7Sh9Wg9DAE8EPgk6uP46IFGf4e80aVitbrP6Y2heeZT5P7wV3Ejh+qmN0bhB6b1zZADEAAO/vJID2qsRSFBL+WN7xrRg+v7omgrDb/T23q1Ru+L9j8hfjd/NsgvqtVvb35HHSDW6Z/IRbJbFt1jkeGbgMQ7GqJzfezcI+Fnws7Po/tc09T3If2E9ucDzmd6ebp21KjVaREWPzCtvQrdfuvvPW8hnoWJJNvWH0bdHxsPrL/m3Z8g/E/Fb2+3FuD3Pczv8oN3wbALfri8efT7a5Tfv7D7hi6GJQLfwBs9HD6JQjKaPPvJkaUkDpnRPeP71M9o8EGrtw+4+4EMbPgQr/7Yu8bGd248HfLfcHjjTahFwZCd98MRoOB2YL6F+yYuTknNj/Q/euJQ/9v9ffmRpDo3UBe8utrY/bYX8YT/wh1CmZhw/wv5BEFIduZtSrCsRyzmeMpPKni4fPdHoweB+8O78iMHGrg1BM4tlJR+85gc2nr1UoAvuvfaOh+nsG7CBxZ8ojwlP+L/GvSAwHe2fm3s/vqDJxt2N0gGu16/+vM75An3rjZubgIA65sPg/7vSfCyBD6Jzh3x5o7NFbA82Pmn53wgSGphLihYanQFgQoZ2PAhXo2OmB9yz+iEYjJ6b0OnKI7hWS/wxMcp3q3NW1ax+0tnPz+Gxp/BjGur1tq4RWPQ+tUu/P+NqyuUPr99EAC49+Dy9+mjDf9ymI1YF4w/uTEKjeAOj7mepbEZdrrp5FAQZKBa/MC4llavsfFM4H7A0UMjGj3UNz3P03gd9Wv1v4Fe0aadrg5NHT98rEa9ZWOb2/44dZySyC8c/4HT3Zrvp9ajz/ld7f6CxrO6e1W7/ffm8tctDAk3/gQBQnt66vMLzAPC3xj2HwJINAA4+I/bxMp4j+knMJ7gE9k4B+Nb36f0fuCHQ/h865zpq9EposY2Nx0f6H7r296djaA2uMgAn2k/aATbfJzy1zudIE4RVyykit/3btBcEEufvY8CvEXO7/aqtvt77/R07383f+A4JjwE/cj4+T4cpXkhzOAdeciPUejc0YEgeUYtK2MDu9oRl3/DPdi3lnTuKC5P1/7O3fps5NDgl4AINOVfOnaBUNe5DkS2BaONN1ycQmcYGttcYLH5UOT+4vhF85/fWvU6q2BZj2QNoO28Qq6wdXWzh0P2vXAYsVe5/PjNO6JWDeY/65E6GMEYJWHu6B03d4Sfuj3nuBwEIgw6d8RHkx7ZdT7DyRq9EVXg2llvqiEI0TbibgXEj/ORmzROecIFFo+56os4fmqPn38gpROs50TKBuvV3Rp0ehtXH24ePKg8erTnaQtU/ndzc3N5Wfn9x4sSA2VMVTSFGzbq8XNHorwMTa1csJ1Rje4R11EhMn9c6w1nBYEKiesFTfeDZpTXtqMKNOS2F/mRCXloTIX8ArP16w/56TVm4vghsLjgSzz/wM3/gb0PEOAP9rD0yyjAau3X198fv30g+sZ0+e3yT+V06/SyRpoieIbaZnQC9yLapn7yjDd3nz18fmITG0AB6bdH/rg2Ye6IBO8Jc0fv96Ni8RwLLbwn5hqNV9Pm4AVzR3SMss7PHcUU7Inn/wTz73sfUNER6z0RHwjD9297cKRyWrn5+Ofy8hKju/zz5+ODLZRW2/sXl1kEerAQn2AWj80dCWblPffnR3ZkKQPe0l4fsrQOLYUSJc+I+eQC5/p7Gu78qNVDqtXYZM+6N15hDc2nNonWGIc2R7jFbodoVUU0c5PEz3BF9S/gFAH8EecDqx/AnpewxmJGdGvr0em/e7/QmLy2uR0wwIJbSjCLx+Z/eMtKNx2wTcSgHvzHjSzfscOZ0eWjvxeZ545YYOGXLPkJFPEkfOuh32O5HE3tDSnWfbMdxbcpmPqL5RdTf5bsA29vbvYCQQPmd4pGo/+7+Qa9YzXs+2p4seXoxbAY29cF2XLI15c9O47OHZ14+/K1FGcswpg2d7TOVZ34c0cCy0rn1Gi4DgM4GgE8jNImh7B0ITRB0Y217yQo+R4hC2/8uHr1DPWDsAcm+MBaq/brwelXT6d7lQcf//z59uHX7lW95fk+tpjB6zo/dFkT1vMluT8aWDBLSB0i3401Nqahc0e8pb4mwxeu6qTO3N9fzt6xghLPX9Wr/q9qi1Ogrxg/Lk7xixRDR9aqrwRFwon8xPXX4PRbrZrgA2u4hv4XqqLf3d3YuLqC6Fq0CDawUozQ961lnjuiyU9mCdlsEp+Dob1X+znF/QmqTjwzL0p+sp7pHdT6xx+eCCbwqoE8Fj93JFStVX/1vhH/wF2m+vnK1w+twCAGBvKRCsUac+z4SZbAVt8EoMUOxMOpg4S5o/PolvOf3NzROzbVF1NN4UUYiF/s3BGfd6QxGb9A0WMPH01WQn8Y0D+iOgo2B7/+kIv+alzJbrX64/uTtZinZBL4xT9/hH3gwxgfmHAbheI+ke+LmTuimzgSJ5QECwSu2bOAgqkFT95kxCFf5E0GNo3oyMFPafE1od5ceWDKvb4ZiC1iyii8+RbRVOLDl5GD6ptP3iTRi3v+KPb5PxoHZgQYPEIQtkdJMLG5Iz559vTCO8p3f4FaM+HjEArrzyL35xXucilJNuDgZ9aJEQlOCgaji5im8O4Hvsat/r6NVoMMf/Y33nTG8kt6/vbRHvKB/rNEKR6fnh73RUkwsRCPN4g/o6UTzCGKT0VEQw4+UCGeNr7qpLHNxWQkd+tHUtHFxcVtQYazvDdFc0dcVObbuvT8RonPv8NRaMgHpnn+ffNhGF/MJcWU8wmnJZTn9Cja1WimDfOLqUc7ocMhPnnm9Uze/Xn2S1DPR0qC2rQBWo9fhSUsovD8aWObO93jtQaMPqM+9ktWfvj598T1J6I+cMojULXNtUBvFfs+MSQW4vFzRzQv41dV0FADSzAUQqLJ8Ni5oyfRi2cJyzY/HEGerNGm1bqtJ5FHZt+8FheC4tu3/ZLbiJJnXNamxtWMTuXXtaet/5LJBwYfeon1fWJ+Z7Hmjj234sccZ+FnHbiTIdG5I968kvuBrxpqUVvfjto7MtfKRjV8cTxfnEvOiDPRMXNH61zpqbjsJYEfWv9l2vpLGODDuDgwcgOl8X1I/OOUT59fYK3xW1hVJ9v04ihwLnFBNi2FEswdkaP5GXHYq7yV3qO/CwcC6689RoIEZUyERypRuOeO6ji52GjzT86Iys6S+KH1l5LXP3u0l9oHBgzty/0E37cmmvg5vyY6iZq7MxoqHB6xzw5DD0sLupg/dyQYntKnbqPPLtR/eM4smtKqohuRIYpWlpF24VLhBAg8jK9x8+aOeDPdEpw5iR9a/2zq+oO4BwbQxK4/yFLW669R3Bff+2KffRfovyM+0gu5P3iyhqAi+ymNHs6jW+jR0OZFFl9gyYjQh14a0W9tkZVb5zOcGMh2Q/QYE5k7ajQ4sMK6z3h+aP3B6et/pvOBgbD9dS3B93kw1q65huV1fn3sezrfM0bXxBKUl9G5I1E0SY3v+varzalvHar++AentNZfe+sUiIuL1h/utwRHo0oW2M+jn3pt+eZxdEvs3IOYH17/c+r6u14yOzkOTJHzDOnw4sXZ9UmSnqHVx4PLwbx9RnQdWWti7fDn9bOIPrPhbHTLtb/UCIzBvv99nKS/37+skbUg2t/pR8IkSaPxRXgC6Djb/3BnpXbqyavIlldJ607HrL87ff3raBwoGMSEH7dO9H2Mx9Hx8fHPnz+P2X/If7F/rEVX/z8m4tfROqSbmPx94regqdg2XycRqplos7eM0h1j1/ERnqAh2sJqada5b09qsJj1r9OsP098YHBZngi+ze1Q3Det93nNnqzY/VOcKuFLou2eKH7H2F8Te3yKk4qKpDjFrD+f7v0PiT5wSqmSVC6Kef9DuvevJBU1pY/7pOZQzPtX0r7/6Fsr1M8CT+amSllLzauY9x+lfv9YqCot8P6xamC6VlSqJJWPYt4/lv79f5GiJvb+P9b7pO8rULHv/0v7/s2oDxS8f7O++Vq+f7MYxb9/MwERkhIAABPrSURBVPX7bx/thXwgef8tDZDwMlubX+T7b4tRwvtv079/Gpz+agUKe0PvnyYhxbLf0nx3Ff/+6Uzvfw/5wIBxRmW6U5OJUnMo9v3vSuIMYEThwl6G7zU8P1kLTaoY7d5+/P0ohELvKYRfygCCQA+HEbT3wbjv6vKBVHF69HUvggKFD5ifaAnXLABxzvPqcu+RVHHifZzhePys2BJCobAJhT6QZuZx4HD15+v0I6Xy1Mjy+Glq+gFMhcaB++/J4rHtNfSmo6rEt2gBVfP4KZ2tbEfiOLD66suT7e3X/7yq16Hvk/gWra2OQvmlymAHhCd0IcH9/f1N+D8QX9S3ShUutcf4TS2B4YTeykkeAUBrUvw5nX6EVM5qOozfMDO/yunlRhWVakHXt/FRGs8lqDlk/JLeARgjcPrgw+4V1O6H/0njuQQB3Wb8kmvoY/Ro738fP368qew9mr6vVO7S+xrjN7WGV6yYuFJqETJcxec3tQZUqmxqmgF+w+wOUGqpAvowwM+exQFKLVF63w7wm/IQklTppA60AD/FkfxWS6qjBPmlroGRKoVw7UuAnz2W/FZJYGyH+GWqoZBaunDtRJCfdIArJer+GD9rpgyM1JJkWBF+SkU6wNUR8LHRP2QEuELCpWdhfsNsRUxSy9RoyPGbYQ5Qakny5v5C/LRJAQZUb8KwRJWWOWepE43jN0MRzFQZfWcyUntZy6OkpqjpKDw/C+RtQPEUo9u1lK5MDuQpACwBv1TrGGT6mg4cFWmKpWgyuZqr0LoFPD+Fe5POnAIdzer0bMWS9jNfqa4i4mfOHcIDdbQzgv/n8dIn/Z2d7iSwvozehNtHRvB7jCaRoepkD1/wNKq30aCjY7ZdDYyX4ffirw2cVw+fln4KdxO4eR1dlPe3943kVICdxTs1MPzLg2Mzb7vhn2cnKY8FjMj56AcJxwjOUjGF/OaehNcrE9OCMgfeB2of/tvPrAJ94gwta+h2A23vOliu2xsD2CATx5fbUQfeX4NJV0dXp/fpxsGkotPTVgbm0BrCr2U/QKfngafV2bfpY/j1vJnR+0N2mcD7RvxMMhizs/TxWUDXDVxfX+/SC/XP48Y3on+02+uGTpf6CWjyNbaQnzKYjx+8fGaK8V1IJqmYX4Wtx7ZTjwjGlr/4ozUAuhtYC1Ib7AzZP7XhAP7kpuNvt71vAQP6e2w2i6K67Ddqlus1j+f3o0/rgI7l3706+UYNX7Q+sAPfBkdh+sQfOcAR+6hHdrbwz9HR88yKFT8TB/2Wf/XmGJ8OfaDZGZ6ARlcVuIYgP3Mufrh1ho5jWvSJQn1CYOne1cMNlulgiGzNEtBHV2MPcbNpPbULHaZiw1vSHNp2Xx27ZKvl3RWg27MQyyFu2AH6Gh3tAr/XIifwTtsdoxN6Bw7Jh17NQTRTSC9TJQeiO8Tse2eZkG/DzTyEZDr4HkSXZ9rwejoTE253x97p8XkSekGnjwb+lndR8K4iHziTTI5LN2P4KXPxQ9GCNYb+pttzyL3cNPHLbMjcPugO0TSxqnbQJfuDXaOPcXbxmGq4A1QLrWiiqrDteoBUqZp6d+x4nUKvDNGKC50xvtcN1PpwD6eiqrj3m6xj76D7oNPp4kZ1sYdRTfx2negbS0bkMj33b6A+5XjJRIASVVYfnsX2brod1HhdQ9c7fWjwAYrE7Inn87zzJIzWRuhq3Aq+RzQEuok+6GWb+9GDyEL8BvNMIqF6fNQGAFCH09QUx6TrI+BeP4DtqGOrytyE3sftC5poRlIb4dQQpgCQw8PP6DvwU7TWCWoa7Lytim6gToPWzkcbNOgCYcPbQR++AwHbBmxhDHCnQvyGCdtbi4SjO/AbhqwIXUWnYbkMA/Eb6+QsGvy6EbqRxuTyAJmH874TdDXFRT8toRFxFx3AoRdtAmOQ3GMFMoLmM8wv9l06qc47xA7I9y7ILg1w70J3JK5XxGBx5anDxhR9zzKqqIWapP/BmwDgdILHz/vlVhd4/ABA9tGGO8FWI7l3vJyG3xaEH/oC1ClQE6NTTNBpwpkm2B5ar8cMaJhfc+h5NNSdFdj/ET8NAiWXF+SH7E9/ILDPAakerpEZ5Jet9mEn6ILD/JRM46CIMBbb6Y0N73LgRdqTHY2YOVCxvW5A0jLM0DF+yCzYxH4Ou51ut4s7IeWHY1arr1N+uP+ZI+K88Du4wFaoXzN+6lDxBlTwyCYauw1DgRI0kVbfUOgUdhy/ISGM+fXp5QX5wS+0sNdN6AW0/6Frwodl5we6IWJhfu4cOVAMAl6WZU5GuOsAG7o+7C9gA+B+onn8tEDBG+E30ndc3DMwP9vCYUgzyA81PPSahJ9q9NFgCJ7DcFmHMmL4md4N0rVRRx1GMk34Yx3jwXevLuaHewwclmH7iS8PjT8C/ABAfhsZRi2+FxB+Tez/8JVm59d0Q8TC/ObKgTLDrJnYNcDRnjNqTkj76mOF8sPDwDA/Bw7ENGIfVWYe0JuZAvwsn59iw4G45iA/hlO5pLmxAWDRnW8/PX6o5MdtjlwlnGlCd5OzQwYW6DRp+BFhm8z4oV/vjkjKl/UC0BwhNWmrYn7o4okpmYFfMPfJ80u3FmicjIpjkYAJjdTgT9ecwQDBslXCT/H5mfQgr9ui32VCIMT/dTtw5FgBUX5oJEH44TsA/WzMj7zDEPML+z/sePHHBraA7mCA7pNhoIcAcpmo3fE6HDH2c+TdBcR+VuD14a/H/HB3blrQeXinp40InYYG5ceEmJ+GLEmPjHAz81N74ZclhPmlXktSLNDc6TleEAvG/o0CB/4A88MXje0n+yLMzxoOTac/QgNOHY9f9Oj4BdtPNG5B/OzJZEjMJ7GfpHYAORX/bTKMH7af8G43/F8ZMKD4vqCXiXuUYPxJ+cWMX9DZgkkRdno8yFICo2LMz8G2hgQNmfnpfv8X8UvIHqSTaoyJh0G9zIZhronDsib2fwpOheJ1ZyLxgwpQOhH95C07MLgJjl9QpzW8+EFvVkLjUmSgcBrFX8yb8UOlWtBwo8f9LXg5TshLYmNg0ctE2GL4odPR+EHzG4nxw9EvPA++fal9BsD18mvB/jdoolvK6s7i/4K9QsRvnjImtYlNOvIwyFE5OKwDes9zbPiHIZeG7JzVD/PzPQaL/1AMwfgB3M/gxeGcHOyH2G5CbLhfa4iainqAyXKdhB+A4aaCDSyKxF0YD+JlGyzWYih8HMDLJPcB/F5s3TE/1MO8+K+ioyjEpP1wTC+P8UMDF20AT2+EnDsMErFC/m+gYyOIc1RZ+amDCK8ov+HM/U91zX4HXjDqXlZXRdEYalacd9EGTdzxoSFR9QG9eCwcCLgj1uG8/AsM3rv9LsD5FwveUz0vzAM4/wLbk8QNsGXQfQF9oY46pu0XgeCAbQw66Dq0DlChKSNbd7Ah8L5fR3XoqPeitdyhVzJo/kXVK50JvE2wTYZnocNWMp6Glwc640D+RYXhjY16FD5hbC0KTgMgzDh+MGbof8MIryg/ZVYDihyXNoS2wkRjYwMnLscdQPgpZh83ELSormnjgTY9bIxdwpimmHEezXJd1zEtzW12ccrSwtYNWRzQmeCWHONoHWUedbKHQ+wi7ceg00H8bBMlSm04qEFDdmtCzaxikp8J0GXi8b53mfC8OLoZoO+HPYVcND6LhowuBqk48PrMoTbsVMbopnHHehdx7FZoFsGJaUWcBnT6AI9ih73M/MgoIpHfzGUwKrs1NBeO23CrojuWOFwbejC6g2ayiR7YbKidNdsbz+j+vAG6lh2TjbZsZ4zdDE7h22aHOHI0kmSH2L4ZVgfMT2hmTwddfCLkybABJMlotIQY/bhCPraBGRjfOYHphiE8S+A34I86PXw12lAlCe4++iK8yRJ1QND3phsmBl58QEOjhEz8mpHRi4CfNpq1A3adoWXbQxPejsBAQwITzWuBgYkFPWGnZ1q2NXT7/vQf6Dhkszfu13umL7fbdMlfjjvpAjxe97a76OvgyVzU8bsu/GLLHATymuw8Tm+MbxaXXk+TfKGDXZR3mShSId/k6G7g+yt9+ldv3EFEwNjxNzvQpgzJXyr9uaDjnUfIjx7dhV4YXXIHZOt/YMS9aY3jN+NaFOjsBp4Fb+IMKJ7GNthfeIoa6E28PXS5Bp3L9ho+OP8O2Py7Sg2uzqbm4dd5M/1ARWFyM1TAumWwaXpAduGvh11mxf8YqMHvp/Pv3lnC8+8Gm39Xya9Apweh03MtxKbb0ZT/CP43cjOpC48Ml6PF87OMmYcwUlkEh9Juz8oQswHDSsFvvhyMVGoh34fsoZu2v0RzL2J+KEqWWoBIqGENUpeNGSYPS8Av90JQKbF0FPcbqZ87CZZ9JvGbMwkqlV6Zpnuiqc9YfvY807hSBQlNVKbjN3sIIVWcBMFDHD9bPstZPo1E3U/Mb75CNKkiZERnHpL4WfJh3JIJz2un5qfJDlgyGQM+do/nJ9dDK5nYemcp+c37LItUvtLF3i+e31Cu51Mi4aqDTPzST2pIFS/vEaks/OZ6FkIqX+2IB59J/LI+1SRVnIxeLKV4fjIGLIviYr9kfjILWhaJM59T+Vly2Z1SiDxXn52fnAcsh4Tzfmn4yUXNyyC2VHlmftleTC1VjIyk7pfMT5FZ0KULdBIJJfOTi/IuXaO4zFkafnIid9mKmbZNy8+SFnSpIk9Lzc5PBvHLVVLonoqfPZZB4PKkJ8YOafglLuclVbDw2gvz8VPk4yxLkxo/75CenxVdL1NqQQqsZTQHvyJeLCCVRvzT0jPxs6UFXYrwSjQ58JPFhEtRbMlgZn5KwprcUkVJnxb6pecnX6CyeOnd6VhS87Oa0oIuVqA5feyZnp9Moy1aUxNn2fjZRbxdTipWquhZ9zn4yTHoQpVu7JmFnyxmWqQSS5Zm41fI+zmlhAq8XzM3fngxVKlFCKgpnV8mfoopn2hZjPAasfnzk0HEYpQ2dMjMTy6stQgJl8nKhZ+sZlqAplYszcFPusDilcX5ZeYn60GL1rR6zzn5ySiwWGWI/GbiF3jBiVT+0qOvV8mdX+ANJ1J5C4RebVsMP1nOVJzSFCzNzU+OYYpS1rHLjPzkXGAxSj3nNye/wMvDpPJT8E2ExfKTk7kFKP2U7fz8FFPOJeUsMP1RlRz5yUFo3pph6DkPv7neNC7FqZllzigPfnKF5TwVtzpycfzka65ylOjFVEXzI+9vlcpBRn+GwG9ufuglxcv+5XdCatL6dAXyU6yOBDi/1GwT7jnyk5NJOSj7lFF+/NB715f9+1dc+mxpl5z4KUNdApxHW/p8+Oblp5iGBDi7dNErURfKT77oYw5txb6WY3H8FBNehtQs0ivm3K0/Pz9laEiAs2jLmLv35cJPMeUgZgbp2YuVBMqDnzKU61Nklt7NofflxE8CzKyc8OXEDwbyMpWWReqcYTtTTvxkMjuT5kpZh5QXP8XqS4Bppc5UaiZUbvwUW75wLqWMNAsLplR+/BRtIGti0qg5c7GEQDnyUzRXLpM2VaDp5ogvV36K4si60CkC6oyFgjHKl59iygnBROkdM98Gz5mfMhzLYWi81HFOYR9T3vwUayKHoXEyJrnFDVS581PsgRzFCAWag/ziBqr8+aGlCqUT5KWnX1Qwg4rgp5jSCXJSx2YRTV0IP+kEORXg+rCK4adogx3pBH2BnTxzLkEVxE9GgkHlHvX5KoyftKFMRdlOpOL4KbYrbWgF2U43/7CBqUB+6DF5OQ5VZ3ywPaUK5YdWfL3fXRBkW401u4rlp2jOvS6MUTtOQeNOqoL5KcpwYtzXLgiMSd7pak6F84PDmOb9jCT0ZpEDF0/F80O1affQCwI9txqzJC2Cn6K4984Lqp1ZV3TJpsXwU4a9ezWpBJq9wj0f0YL4KbZzj2JBVXWK93xEi+IHvWBPvR/jGF3tLcLzES2OH5oWvAehBDCKmeiL0SL5wVCic9dz2kZnAUFDQAvlB43oYHSXuyAYDRZnOrEWzA89aXZnjSgw8noqLL0Wzk9RnPGdrG/S9XERBUpTtAR+MJbo3rk+CIzuwmKGoJbBD7pBV79bAxlDdxfs+Dwthx+KBnfuTFIU6DsLjPjCWhY/VB9TuRMEgV4psL5lmpbHDw5FB6s/FoVjzsHCB50BLZMfIrjiftDQl0pv2fwUDQb0K9sHgQHD9YLrI6ZpyfwUlFTrrmQ8qOvdxabKhFo+PxQPToxVe/BaNSZLifeiKgM/SNDsGStkRoFh9Mwy0CsLP+QI3dGKTNGD5shdtttjKgs/BdWKjkHpzSi8wnHRNZ1ZVCJ+CoonxnqJEQJVHy85XoiqXPwUxXJ6oKR2FF5Xz1lepkWssvHDnrC7U76o3tjplsfr+SofPyRroEOVpRsCdDGLnlhPqXLygzIH/YpaAoRAVyv9gbns5ohTafmhoNCdgOZShzNAbYKJW5JQT6gS84OyLWeij5aEEKgjfeJYJYanlJ0flGYPex0DWtJFQgTQahqd3tAu34AlotLzw4JRxbijLsYdQnRqZ1y+SEGs1eAHZQ+dQV9vGoUyBLrR1PsDZ1huoxnQyvBTsCk1XciwqW7lDxFsqU3IzjVXwGgGtEr8sCBEp9dRR9gl5oERYGc3Ujs9Z7XQYa0cPyLNcga9freDnNWsgT4My5FL7XT7vYFTwtRKKq0oPyzNGpoQ42TcgTbVQBzTgASImwGNcGc8geDM4aqiw1plfkSabQ0hRxf1R320szMaQZiGivolE/yXAZGN0GYd9TcXchtaq2cuOa0+PypN02woyzQdx3Ehzl5vQgT/Grgu/NQ0LbQL3HPZF5ub/g/Pplp86M0RFAAAAABJRU5ErkJggg==">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Tema UNICAR: cinza-chumbo, vermelho e amarelo, baseado na logo/fachada da loja */
+    --bg: #1b1c1f;
+    --bg-elevated: #26282c;
+    --bg-sunken: #151618;
+    --text: #f2f2f0;
+    --text-muted: #b3b4b8;
+    --text-faint: #7d7e83;
+    --border: #38393e;
+    --border-strong: #4a4b52;
+    --accent: #e2231a;
+    --accent-strong: #ff3a2f;
+    --accent-soft: rgba(226,35,26,0.16);
+    --yellow: #ffd400;
+    --yellow-soft: rgba(255,212,0,0.15);
+    --good: #3ecf7e;
+    --good-soft: rgba(62,207,126,0.15);
+    --warn: #ffd400;
+    --warn-soft: rgba(255,212,0,0.15);
+    --bad: #ff5252;
+    --bad-soft: rgba(255,82,82,0.15);
+    --info: #4aa3ff;
+    --info-soft: rgba(74,163,255,0.15);
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    --radius: 12px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  /* Tema claro — mesma marca (vermelho/amarelo), fundo e texto invertidos */
+  html[data-theme="light"] {
+    --bg: #f2f3f5;
+    --bg-elevated: #ffffff;
+    --bg-sunken: #e6e7eb;
+    --text: #1c1d20;
+    --text-muted: #54565c;
+    --text-faint: #80828a;
+    --border: #dcdde2;
+    --border-strong: #c3c5cc;
+    --shadow: 0 1px 2px rgba(20,20,30,0.06), 0 8px 20px rgba(20,20,30,0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+  .app { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark { width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0; object-fit: cover; box-shadow: 0 0 0 2px var(--accent), var(--shadow); }
+  .brand-text h1 { font-size: 18px; margin: 0; font-weight: 800; letter-spacing: -0.2px; }
+  .brand-text h1 .hl { color: var(--yellow); }
+  .brand-text p { margin: 0; font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; }
+  .topbar-actions { display: flex; gap: 10px; align-items: center; }
+
+  .status-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); padding: 6px 10px; border-radius: 100px; background: var(--bg-elevated); border: 1px solid var(--border); }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--good); }
+  .status-dot.offline { background: var(--bad); }
+  .user-perfil { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; color: var(--yellow); margin-left: 2px; }
+
+  .tabs { display: flex; gap: 4px; background: var(--bg-sunken); border-radius: 10px; padding: 4px; margin-bottom: 22px; overflow-x: auto; }
+  .tab { border: none; background: transparent; color: var(--text-muted); padding: 9px 16px; border-radius: 8px; font-size: 13.5px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.15s ease; font-family: inherit; }
+  .tab.active { background: var(--bg-elevated); color: var(--text); box-shadow: var(--shadow); }
+  .tab:hover:not(.active) { color: var(--text); }
+
+  .view { display: none; }
+  .view.active { display: block; }
+
+  .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 22px; }
+  @media (max-width: 800px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+  .stat-card { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+  .stat-card .label { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+  .stat-card .value { font-size: 26px; font-weight: 800; margin-top: 6px; letter-spacing: -0.5px; }
+  .stat-card .value.accent { color: var(--accent); }
+  .stat-card .value.bad { color: var(--bad); }
+  .stat-card .sub { font-size: 12px; color: var(--text-faint); margin-top: 2px; }
+
+  .panel { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .panel-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .panel-header h2 { font-size: 15px; margin: 0; font-weight: 700; }
+  .panel-body { padding: 16px 18px; }
+
+  .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  input, select, textarea { font-family: inherit; font-size: 13.5px; color: var(--text); background: var(--bg); border: 1px solid var(--border-strong); border-radius: 8px; padding: 8px 11px; outline: none; }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+  .search-input { width: 220px; }
+
+  button { font-family: inherit; cursor: pointer; border-radius: 8px; font-weight: 600; font-size: 13.5px; border: 1px solid transparent; padding: 8px 14px; transition: all 0.12s ease; }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-primary:hover { background: var(--accent-strong); }
+  .btn-secondary { background: var(--bg-sunken); color: var(--text); border-color: var(--border-strong); }
+  .btn-secondary:hover { background: var(--border); }
+  .btn-ghost { background: transparent; color: var(--text-muted); border-color: transparent; padding: 6px 10px; }
+  .btn-ghost:hover { background: var(--bg-sunken); color: var(--text); }
+  .btn-danger-ghost { background: transparent; color: var(--bad); border-color: transparent; padding: 6px 10px; }
+  .btn-danger-ghost:hover { background: var(--bad-soft); }
+  .btn-sm { padding: 5px 10px; font-size: 12.5px; }
+
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 680px; }
+  th { text-align: left; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.3px; color: var(--text-faint); font-weight: 700; padding: 10px 12px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  td { padding: 11px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr.row-alert td:first-child { border-left: 3px solid var(--bad); }
+  .cell-main { font-weight: 600; }
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 700; padding: 3px 8px; border-radius: 100px; white-space: nowrap; }
+  .badge.novo { background: var(--good-soft); color: var(--good); }
+  .badge.remoldado { background: var(--warn-soft); color: var(--warn); }
+  .badge.alerta { background: var(--bad-soft); color: var(--bad); }
+
+  .badge.recebido { background: var(--yellow-soft); color: var(--yellow); }
+  .badge.na_fabrica { background: var(--info-soft); color: var(--info); }
+  .badge.aprovado { background: var(--good-soft); color: var(--good); }
+  .badge.reprovado { background: var(--bad-soft); color: var(--bad); }
+  .badge.finalizado { background: rgba(255,255,255,0.07); color: var(--text-muted); }
+
+  /* Linha do tempo da garantia */
+  .timeline { position: relative; padding-left: 26px; }
+  .timeline::before { content: ''; position: absolute; left: 9px; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
+  .tl-item { position: relative; padding: 0 0 16px 0; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-dot { position: absolute; left: -22px; top: 2px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--bg-elevated); background: var(--border-strong); }
+  .tl-dot.done { background: var(--good); }
+  .tl-dot.bad { background: var(--bad); }
+  .tl-dot.info { background: var(--info); }
+  .tl-dot.wait { background: var(--bg); border-color: var(--border-strong); }
+  .tl-title { font-size: 13.5px; font-weight: 700; }
+  .tl-when { font-size: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; margin-top: 2px; }
+  .tl-obs { font-size: 12px; color: var(--text-faint); margin-top: 3px; }
+  .tl-item.pending .tl-title { color: var(--text-faint); font-weight: 600; }
+
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; margin-bottom: 18px; }
+  .detail-grid .k { font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; color: var(--text-faint); font-weight: 700; }
+  .detail-grid .v { font-size: 13.5px; font-weight: 600; margin-top: 2px; }
+
+  .qty-badge { font-weight: 800; font-size: 14px; }
+  .qty-badge.low { color: var(--bad); }
+
+  .empty-state { text-align: center; padding: 48px 20px; color: var(--text-faint); }
+  .empty-state .big { font-size: 32px; margin-bottom: 8px; }
+  .empty-state p { margin: 4px 0; font-size: 13.5px; }
+
+  .modal-overlay { position: fixed; inset: 0; background: rgba(10,10,12,0.5); backdrop-filter: blur(2px); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 100; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--bg-elevated); border-radius: 16px; border: 1px solid var(--border); width: 100%; max-width: 480px; max-height: 88vh; overflow-y: auto; box-shadow: var(--shadow); }
+  .modal-header { padding: 18px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .modal-header h3 { margin: 0; font-size: 16px; font-weight: 700; }
+  .modal-body { padding: 20px; display: grid; gap: 13px; }
+  .modal-footer { padding: 16px 20px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
+  .field { display: grid; gap: 5px; }
+  .field label { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .close-x { background: transparent; border: none; font-size: 18px; color: var(--text-faint); padding: 4px 8px; }
+
+  .move-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .move-item:last-child { border-bottom: none; }
+  .move-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; flex-shrink: 0; }
+  .move-icon.entrada { background: var(--good-soft); color: var(--good); }
+  .move-icon.saida { background: var(--bad-soft); color: var(--bad); }
+  .move-info { flex: 1; min-width: 0; }
+  .move-info .title { font-size: 13px; font-weight: 600; }
+  .move-info .meta { font-size: 11.5px; color: var(--text-faint); margin-top: 1px; }
+  .move-qty { font-weight: 800; font-size: 14px; white-space: nowrap; }
+  .move-qty.entrada { color: var(--good); }
+  .move-qty.saida { color: var(--bad); }
+
+  .toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--accent); color: white; padding: 10px 18px; border-radius: 100px; font-size: 13px; font-weight: 600; opacity: 0; pointer-events: none; transition: all 0.25s ease; z-index: 200; box-shadow: var(--shadow); }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .filters-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+  .filter-chip { font-size: 12px; padding: 6px 12px; border-radius: 100px; border: 1px solid var(--border-strong); background: var(--bg); color: var(--text-muted); cursor: pointer; font-weight: 600; }
+  .filter-chip.active { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+
+  footer.hint { text-align: center; color: var(--text-faint); font-size: 12px; margin-top: 28px; }
+
+  .loc-group { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+  .loc-group:last-child { margin-bottom: 0; }
+  .loc-group-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; background: var(--bg-sunken); }
+  .loc-group-header .loc-name { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 13.5px; }
+  .loc-group-header .loc-name .pin { color: var(--yellow); }
+  .loc-group-header .loc-count { font-size: 11.5px; color: var(--text-faint); font-weight: 600; }
+  .loc-items { padding: 6px 14px; }
+  .loc-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border); }
+  .loc-item:last-child { border-bottom: none; }
+  .loc-item .info { min-width: 0; }
+  .loc-item .info .t { font-weight: 600; font-size: 13px; }
+  .loc-item .info .s { font-size: 11.5px; color: var(--text-faint); }
+  .loc-item .qty { font-weight: 800; font-size: 13.5px; white-space: nowrap; }
+  /* Bebidas: formulário de movimentação (adapta no celular) */
+  .bebida-form { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; align-items: start; }
+  .bebida-form .span-2 { grid-column: span 2; }
+  .bebida-form .field:last-child { align-self: end; } /* botão alinhado com a caixa de texto */
+  /* A tabela de bebidas tem só 3 colunas: não precisa do min-width das tabelas largas de pneus */
+  #bebidaTable { min-width: 0; }
+  @media (max-width: 700px) {
+    .bebida-form { grid-template-columns: 1fr 1fr; }
+    .bebida-form .field:first-child,
+    .bebida-form .span-2,
+    .bebida-form .field:last-child { grid-column: 1 / -1; }
+    #bebidaTable th, #bebidaTable td { padding-left: 8px; padding-right: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <div class="brand">
+      <img class="brand-mark" src="data:image/png;base64,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" alt="Logo UNICAR">
+      <div class="brand-text">
+        <h1>UNI<span class="hl">CAR</span></h1>
+        <p>São Pedro da Aldeia · Estoque de pneus</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <span class="status-pill"><span class="status-dot offline" id="connDot"></span><span id="connText">Conectando…</span></span>
+      <span class="status-pill" id="userPill" style="display:none;">👤 <strong id="userNome"></strong><span id="userPerfil" class="user-perfil"></span></span>
+      <button class="btn-secondary btn-sm" id="btnTema" title="Alternar tema claro/escuro">🌙</button>
+      <button class="btn-secondary btn-sm" id="btnMinhaSenha">Minha senha</button>
+      <button class="btn-secondary btn-sm" id="btnSair">Sair</button>
+      <button class="btn-primary" id="btnNovoPneu">+ Novo pneu</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-view="dashboard">Painel</button>
+    <button class="tab" data-view="estoque">Estoque</button>
+    <button class="tab" data-view="localizacao">Localização</button>
+    <button class="tab" data-view="movimentos">Movimentações</button>
+    <button class="tab" data-view="garantias">Garantias</button>
+    <button class="tab" data-view="bebidas">Bebidas</button>
+    <button class="tab" data-view="usuarios" id="tabUsuarios" style="display:none;">Usuários</button>
+    <button class="tab" data-view="auditoria" id="tabAuditoria" style="display:none;">Auditoria</button>
+  </div>
+
+  <div class="view active" id="view-dashboard">
+    <div class="cards-grid">
+      <div class="stat-card"><div class="label">Itens (SKUs)</div><div class="value" id="statSkus">0</div><div class="sub">tipos de pneu cadastrados</div></div>
+      <div class="stat-card"><div class="label">Unidades em estoque</div><div class="value" id="statUnidades">0</div><div class="sub">pneus físicos disponíveis</div></div>
+      <div class="stat-card"><div class="label">Valor em estoque</div><div class="value accent" id="statValor">R$ 0</div><div class="sub">a preço de compra</div></div>
+      <div class="stat-card"><div class="label">Estoque baixo</div><div class="value bad" id="statAlertas">0</div><div class="sub">itens abaixo do mínimo</div></div>
+    </div>
+
+    <div class="panel" style="margin-bottom:16px;">
+      <div class="panel-header"><h2>⚠️ Precisa repor</h2></div>
+      <div class="panel-body" id="alertList"><div class="empty-state"><p>Nenhum alerta de estoque por agora.</p></div></div>
+    </div>
+
+    <div class="panel" style="margin-bottom:16px;">
+      <div class="panel-header"><h2>🛡️ Garantias em aberto</h2></div>
+      <div class="panel-body" id="dashGarantias"><div class="empty-state"><p>Nenhuma garantia em andamento.</p></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><h2>Últimas movimentações</h2></div>
+      <div class="panel-body" id="dashMoveList"><div class="empty-state"><p>Nenhuma movimentação registrada ainda.</p></div></div>
+    </div>
+  </div>
+
+  <div class="view" id="view-estoque">
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Estoque de pneus</h2>
+        <div class="toolbar"><input class="search-input" id="searchInput" placeholder="Buscar marca ou medida…"></div>
+      </div>
+      <div class="panel-body" style="padding-top:12px;padding-bottom:4px;">
+        <div class="filters-row" id="filterChips">
+          <button class="filter-chip active" data-status="todos">Todos</button>
+          <button class="filter-chip" data-status="novo">Novo</button>
+          <button class="filter-chip" data-status="remoldado">Remoldado</button>
+          <button class="filter-chip" data-status="alerta">⚠️ Estoque baixo</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Marca</th><th>Medida (com aro)</th><th>Tipo</th><th>Localização</th><th>Qtd.</th><th>Valor de compra</th><th>Valor de venda</th><th></th></tr></thead>
+          <tbody id="tireTableBody"></tbody>
+        </table>
+        <div class="empty-state" id="tireEmptyState" style="display:none;">
+          <div class="big">🛞</div>
+          <p><strong>Nenhum pneu cadastrado ainda.</strong></p>
+          <p>Clique em "Novo pneu" para começar o controle de estoque.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="view" id="view-localizacao">
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Onde está cada pneu</h2>
+        <div class="toolbar"><input class="search-input" id="localSearchInput" placeholder="Buscar por local, marca ou medida…"></div>
+      </div>
+      <div class="panel-body" id="localGroupList">
+        <div class="empty-state">
+          <div class="big">📍</div>
+          <p><strong>Nenhuma localização cadastrada ainda.</strong></p>
+          <p>Edite um pneu no Estoque e preencha "Localização no estoque".</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="view" id="view-movimentos">
+    <div class="panel" style="margin-bottom:16px;">
+      <div class="panel-header"><h2>Registrar movimentação</h2></div>
+      <div class="panel-body">
+        <div class="field-row" style="grid-template-columns: 2fr 1fr 1fr 1fr; align-items:end;">
+          <div class="field"><label>Pneu</label><select id="movPneuSelect"><option value="">Selecione um pneu…</option></select></div>
+          <div class="field"><label>Tipo</label><select id="movTipo"><option value="entrada">Entrada</option><option value="saida">Saída</option></select></div>
+          <div class="field"><label>Quantidade</label><input type="number" id="movQtd" min="1" value="1"></div>
+          <div class="field"><button class="btn-primary" style="width:100%;" id="btnRegistrarMov">Registrar</button></div>
+        </div>
+        <div class="field" style="margin-top:12px;"><label>Motivo / observação (opcional)</label><input type="text" id="movMotivo" placeholder="Ex: venda balcão, compra fornecedor X, ajuste de inventário…"></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><h2>Histórico de movimentações</h2></div>
+      <div class="panel-body" id="fullMoveList"><div class="empty-state"><p>Nenhuma movimentação registrada ainda.</p></div></div>
+    </div>
+  </div>
+
+  <div class="view" id="view-garantias">
+    <div class="cards-grid">
+      <div class="stat-card"><div class="label">Na loja</div><div class="value" id="gStatRecebido">0</div><div class="sub">aguardando envio à fábrica</div></div>
+      <div class="stat-card"><div class="label">Na fábrica</div><div class="value" id="gStatFabrica">0</div><div class="sub">em análise</div></div>
+      <div class="stat-card"><div class="label">Analisados</div><div class="value accent" id="gStatAnalisado">0</div><div class="sub">aguardando saída/entrega</div></div>
+      <div class="stat-card"><div class="label">Finalizados</div><div class="value" id="gStatFinalizado">0</div><div class="sub">já entregues ao cliente</div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Controle de garantias</h2>
+        <div class="toolbar">
+          <input class="search-input" id="gSearchInput" placeholder="Buscar cliente, placa, marca, medida…">
+          <button class="btn-primary" id="btnNovaGarantia">+ Lançar chegada</button>
+        </div>
+      </div>
+      <div class="panel-body" style="padding-top:12px;padding-bottom:4px;">
+        <div class="filters-row" id="gFilterChips">
+          <button class="filter-chip active" data-gstatus="andamento">Em andamento</button>
+          <button class="filter-chip" data-gstatus="recebido">Na loja</button>
+          <button class="filter-chip" data-gstatus="na_fabrica">Na fábrica</button>
+          <button class="filter-chip" data-gstatus="analisado">Analisados</button>
+          <button class="filter-chip" data-gstatus="finalizado">Finalizados</button>
+          <button class="filter-chip" data-gstatus="todos">Todos</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Cliente</th><th>Pneu</th><th>Qtd.</th><th>Situação</th><th>Chegada</th><th>Ida à fábrica</th><th>Análise</th><th>Saída</th><th></th></tr></thead>
+          <tbody id="garantiaTableBody"></tbody>
+        </table>
+        <div class="empty-state" id="garantiaEmptyState" style="display:none;">
+          <div class="big">🛡️</div>
+          <p><strong>Nenhuma garantia neste filtro.</strong></p>
+          <p>Clique em "Lançar chegada" quando um pneu de garantia entrar na loja.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="view" id="view-bebidas">
+    <div class="cards-grid" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="stat-card"><div class="label">Tipos de bebida</div><div class="value" id="bebStatTipos">0</div><div class="sub">cadastradas</div></div>
+      <div class="stat-card"><div class="label">Unidades em estoque</div><div class="value accent" id="bebStatUnidades">0</div><div class="sub">somando todas as bebidas</div></div>
+    </div>
+
+    <div class="panel" style="margin-bottom:16px;">
+      <div class="panel-header"><h2>Registrar entrada / saída</h2></div>
+      <div class="panel-body">
+        <div class="bebida-form">
+          <div class="field"><label>Bebida</label><select id="bebMovSelect"><option value="">Selecione uma bebida…</option></select></div>
+          <div class="field"><label>Tipo</label><select id="bebMovTipo"><option value="saida">Saída</option><option value="entrada">Entrada</option></select></div>
+          <div class="field"><label>Quantidade</label><input type="number" id="bebMovQtd" min="1" step="1" value="1"></div>
+          <div class="field span-2"><label id="bebMovDestinoLabel">Para onde saiu</label><input type="text" id="bebMovDestino" placeholder="Ex: geladeira do balcão, cliente, funcionário…"></div>
+          <div class="field"><button class="btn-primary" style="width:100%;" id="btnBebMov">Registrar</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-bottom:16px;">
+      <div class="panel-header">
+        <h2>Estoque de bebidas</h2>
+        <div class="toolbar"><button class="btn-primary" id="btnNovaBebida">+ Nova bebida</button></div>
+      </div>
+      <div class="table-wrap">
+        <table id="bebidaTable">
+          <thead><tr><th>Bebida</th><th>Estoque</th><th></th></tr></thead>
+          <tbody id="bebidaTableBody"></tbody>
+        </table>
+        <div class="empty-state" id="bebidaEmptyState" style="display:none;">
+          <div class="big">🥤</div>
+          <p><strong>Nenhuma bebida cadastrada ainda.</strong></p>
+          <p>Clique em "Nova bebida" para começar o controle.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><h2>Histórico de bebidas</h2></div>
+      <div class="panel-body" id="bebMoveList"><div class="empty-state"><p>Nenhuma movimentação de bebida registrada ainda.</p></div></div>
+    </div>
+  </div>
+
+  <div class="view" id="view-usuarios">
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Usuários do sistema</h2>
+        <div class="toolbar">
+          <button class="btn-primary" id="btnNovoUsuario">+ Novo usuário</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Nome</th><th>Usuário de acesso</th><th>Perfil</th><th>Situação</th><th>Último acesso</th><th></th></tr></thead>
+          <tbody id="usuarioTableBody"></tbody>
+        </table>
+      </div>
+      <div class="panel-body" style="border-top:1px solid var(--border);color:var(--text-faint);font-size:12px;">
+        O <strong>administrador</strong> pode cadastrar e remover usuários. O <strong>operador</strong> usa o sistema
+        normalmente (estoque, movimentações, garantias e bebidas), mas não mexe nesta aba.
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:20px;">
+      <div class="panel-header">
+        <h2>Backups automáticos</h2>
+        <div class="toolbar">
+          <button class="btn-secondary btn-sm" id="btnBackupAgora">Fazer backup agora</button>
+        </div>
+      </div>
+      <div class="panel-body" style="border-bottom:1px solid var(--border);color:var(--text-faint);font-size:12px;">
+        O sistema salva uma cópia do arquivo de dados a cada 6 horas (e ao ligar), guardando as últimas 60 cópias
+        na pasta <code>backups</code>. Se algo der errado, qualquer cópia pode ser baixada abaixo e usada para
+        restaurar o sistema (substitua o <code>data.json</code> por ela e reinicie o servidor).
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Arquivo</th><th>Criado em</th><th>Tamanho</th><th></th></tr></thead>
+          <tbody id="backupTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="view" id="view-auditoria">
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Log de auditoria</h2>
+        <div class="toolbar" style="color:var(--text-faint);font-size:12px;">Quem alterou o quê no sistema</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Quando</th><th>Usuário</th><th>Ação</th><th>O que aconteceu</th></tr></thead>
+          <tbody id="auditoriaTableBody"></tbody>
+        </table>
+        <div class="empty-state" id="auditoriaEmptyState" style="display:none;">
+          <div class="big">🗒️</div>
+          <p><strong>Nenhum registro de auditoria ainda.</strong></p>
+          <p>Assim que alguém editar preços, excluir um pneu, movimentar bebidas ou mexer em usuários, aparece aqui.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="hint">Servidor local UNICAR · dados salvos neste computador e compartilhados com todos os aparelhos conectados na rede.</footer>
+</div>
+
+<div class="modal-overlay" id="tireModalOverlay">
+  <div class="modal">
+    <div class="modal-header"><h3 id="tireModalTitle">Novo pneu</h3><button class="close-x" id="closeTireModal">✕</button></div>
+    <div class="modal-body">
+      <div class="field-row">
+        <div class="field"><label>Marca</label><input id="fMarca" placeholder="Ex: Pirelli"></div>
+        <div class="field"><label>Medida (com aro)</label><input id="fMedida" placeholder="Ex: 175/65R14"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Tipo</label><select id="fStatus"><option value="novo">Novo</option><option value="remoldado">Remoldado</option></select></div>
+        <div class="field"><label>Localização no estoque</label><input id="fLocal" placeholder="Ex: Prateleira A3, Box 2"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Valor de compra (R$)</label><input type="number" step="0.01" id="fCusto" placeholder="0,00"></div>
+        <div class="field"><label>Valor de venda (R$)</label><input type="number" step="0.01" id="fVenda" placeholder="0,00"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Quantidade em estoque</label><input type="number" id="fQtd" min="0" value="0"></div>
+        <div class="field"><label>Estoque mínimo (alerta)</label><input type="number" id="fMin" min="0" value="2"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" id="cancelTireModal">Cancelar</button>
+      <button class="btn-primary" id="saveTireModal">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="bebidaModalOverlay">
+  <div class="modal">
+    <div class="modal-header"><h3 id="bebidaModalTitle">Nova bebida</h3><button class="close-x" id="closeBebidaModal">✕</button></div>
+    <div class="modal-body">
+      <div class="field"><label>Bebida</label><input id="bNome" placeholder="Ex: Coca-Cola 2L, Água 500ml, Cerveja lata…"></div>
+      <div class="field">
+        <label id="bQtdLabel">Quantidade em estoque</label>
+        <input type="number" id="bQtd" min="0" step="1" value="0">
+        <span style="font-size:11.5px;color:var(--text-faint);display:none;" id="bQtdDica">Use só para corrigir o estoque (ex: contagem). Para o dia a dia, use "Registrar entrada / saída". A correção fica na Auditoria.</span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" id="cancelBebidaModal">Cancelar</button>
+      <button class="btn-primary" id="saveBebidaModal">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="garantiaModalOverlay">
+  <div class="modal">
+    <div class="modal-header"><h3 id="garantiaModalTitle">Chegada de pneu em garantia</h3><button class="close-x" id="closeGarantiaModal">✕</button></div>
+    <div class="modal-body">
+      <div class="field-row">
+        <div class="field"><label>Cliente</label><input id="gCliente" placeholder="Nome do cliente"></div>
+        <div class="field"><label>Telefone</label><input id="gTelefone" placeholder="(22) 90000-0000"></div>
+      </div>
+      <div class="field"><label>Veículo / placa</label><input id="gVeiculo" placeholder="Ex: Gol branco — ABC1D23"></div>
+      <div class="field-row">
+        <div class="field"><label>Marca do pneu</label><input id="gMarca" placeholder="Ex: Pirelli"></div>
+        <div class="field"><label>Medida (com aro)</label><input id="gMedida" placeholder="Ex: 175/65R14"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Quantidade</label><input type="number" id="gQtd" min="1" value="1"></div>
+        <div class="field"><label>Nº de série / DOT</label><input id="gSerie" placeholder="Opcional"></div>
+      </div>
+      <div class="field"><label>Nota fiscal / OS de origem</label><input id="gNota" placeholder="Opcional"></div>
+      <div class="field"><label>Defeito relatado pelo cliente</label><textarea id="gDefeito" rows="2" placeholder="Ex: bolha na lateral, perda de pressão…"></textarea></div>
+      <div class="field"><label>Data e hora da chegada</label><input type="datetime-local" id="gChegadaEm"></div>
+      <div class="field" id="gObsChegadaField"><label>Observação da chegada (opcional)</label><input id="gObsChegada" placeholder="Ex: recebido pelo balcão, cliente deixou o pneu"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" id="cancelGarantiaModal">Cancelar</button>
+      <button class="btn-primary" id="saveGarantiaModal">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="etapaModalOverlay">
+  <div class="modal">
+    <div class="modal-header"><h3 id="etapaModalTitle">Registrar etapa</h3><button class="close-x" id="closeEtapaModal">✕</button></div>
+    <div class="modal-body">
+      <div id="etapaResumo" style="font-size:13px;color:var(--text-muted);"></div>
+      <div class="field" id="etapaResultadoField" style="display:none;">
+        <label>Resultado da análise da fábrica</label>
+        <select id="etapaResultado">
+          <option value="aprovado">Aprovado (garantia aceita)</option>
+          <option value="reprovado">Reprovado (garantia negada)</option>
+        </select>
+      </div>
+      <div class="field"><label>Data e hora</label><input type="datetime-local" id="etapaQuando"></div>
+      <div class="field"><label>Observação (opcional)</label><input id="etapaObs" placeholder="Ex: enviado pela transportadora, laudo nº 123…"></div>
+
+      <div id="etapaBaixaBox" style="display:none;border-top:1px solid var(--border);padding-top:13px;">
+        <label style="display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--text-muted);cursor:pointer;">
+          <input type="checkbox" id="etapaBaixaCheck" style="width:auto;"> Dar baixa no estoque de um pneu entregue ao cliente
+        </label>
+        <div id="etapaBaixaFields" style="display:none;margin-top:10px;" class="field-row">
+          <div class="field"><label>Pneu do estoque</label><select id="etapaBaixaPneu"><option value="">Selecione…</option></select></div>
+          <div class="field"><label>Quantidade</label><input type="number" id="etapaBaixaQtd" min="1" value="1"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" id="cancelEtapaModal">Cancelar</button>
+      <button class="btn-primary" id="saveEtapaModal">Registrar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="detalheModalOverlay">
+  <div class="modal">
+    <div class="modal-header"><h3>Ficha da garantia</h3><button class="close-x" id="closeDetalheModal">✕</button></div>
+    <div class="modal-body" id="detalheBody"></div>
+    <div class="modal-footer">
+      <button class="btn-danger-ghost" id="btnDesfazerEtapa">Desfazer última etapa</button>
+      <button class="btn-secondary" id="fecharDetalheModal">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="usuarioModalOverlay">
+  <div class="modal">
+    <div class="modal-header"><h3 id="usuarioModalTitle">Novo usuário</h3><button class="close-x" id="closeUsuarioModal">✕</button></div>
+    <div class="modal-body">
+      <div class="field"><label>Nome da pessoa</label><input id="uNome" placeholder="Ex: João da Silva"></div>
+      <div class="field" id="uLoginField">
+        <label>Usuário de acesso</label>
+        <input id="uLogin" placeholder="Ex: joao" autocapitalize="off" autocorrect="off" spellcheck="false">
+      </div>
+      <div class="field">
+        <label id="uSenhaLabel">Senha</label>
+        <input id="uSenha" type="text" placeholder="Mínimo de 4 caracteres">
+        <span style="font-size:11.5px;color:var(--text-faint);" id="uSenhaDica">A pessoa poderá trocar essa senha depois, em "Minha senha".</span>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Perfil</label>
+          <select id="uPerfil">
+            <option value="operador">Operador</option>
+            <option value="admin">Administrador</option>
+          </select>
+        </div>
+        <div class="field" id="uAtivoField" style="display:none;">
+          <label>Situação</label>
+          <select id="uAtivo">
+            <option value="sim">Ativo</option>
+            <option value="nao">Bloqueado</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" id="cancelUsuarioModal">Cancelar</button>
+      <button class="btn-primary" id="saveUsuarioModal">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="senhaModalOverlay">
+  <div class="modal">
+    <div class="modal-header"><h3>Trocar minha senha</h3><button class="close-x" id="closeSenhaModal">✕</button></div>
+    <div class="modal-body">
+      <div id="senhaAviso" style="display:none;font-size:12.5px;color:var(--yellow);font-weight:600;"></div>
+      <div class="field"><label>Senha atual</label><input id="sAtual" type="password" autocomplete="current-password"></div>
+      <div class="field"><label>Nova senha</label><input id="sNova" type="password" autocomplete="new-password"></div>
+      <div class="field"><label>Repita a nova senha</label><input id="sNova2" type="password" autocomplete="new-password"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" id="cancelSenhaModal">Cancelar</button>
+      <button class="btn-primary" id="saveSenhaModal">Salvar nova senha</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+(function () {
+  let tires = [];
+  let moves = [];
+  let warranties = [];
+  let drinks = [];         // bebidas
+  let drinkMoves = [];     // movimentações de bebidas
+  let editingBebidaId = null;
+  let editingId = null;
+  let editingGarantiaId = null;
+  let etapaCtx = null;      // { id, etapa }
+  let detalheId = null;
+  let statusFilter = 'todos';
+  let gStatusFilter = 'andamento';
+  let meuUsuario = null;    // usuário logado
+  let usuarios = [];        // lista de usuários (só carregada para o admin)
+  let editingUsuarioId = null;
+
+  const fmtBRL = (n) => 'R$ ' + (Number(n) || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmtDate = (ts) => { if (!ts) return ''; const d = new Date(ts); return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); };
+  const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const fmtDateFull = (ts) => { if (!ts) return '—'; const d = new Date(ts); return d.toLocaleDateString('pt-BR') + ' às ' + d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); };
+  // Converte timestamp -> valor aceito por <input type="datetime-local"> (horário local)
+  const toInputDateTime = (ts) => {
+    const d = ts ? new Date(ts) : new Date();
+    const p = (n) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
+  };
+  const diasEntre = (a, b) => Math.max(0, Math.round((b - a) / 86400000));
+
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2400);
+  }
+
+  function setConn(ok) {
+    document.getElementById('connDot').classList.toggle('offline', !ok);
+    document.getElementById('connText').textContent = ok ? 'Conectado ao servidor local' : 'Sem conexão com o servidor';
+  }
+
+  // ---------- API helpers ----------
+  async function api(method, url, body) {
+    const res = await fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: body !== undefined ? JSON.stringify(body) : undefined,
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.status === 401) {
+      // sessão expirada ou usuário bloqueado: volta para a tela de login
+      window.location.href = '/login.html';
+      throw new Error('Sessão expirada.');
+    }
+    if (!res.ok) {
+      const err = new Error(data.error === 'duplicado' ? data.mensagem : (data.error || 'Erro na requisição.'));
+      err.payload = data;
+      err.status = res.status;
+      throw err;
+    }
+    return data;
+  }
+
+  // ---------- Tabs ----------
+  document.querySelectorAll('.tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('view-' + btn.dataset.view).classList.add('active');
+    });
+  });
+
+  // ---------- Modal ----------
+  const overlay = document.getElementById('tireModalOverlay');
+  function openTireModal(tire) {
+    editingId = tire ? tire.id : null;
+    document.getElementById('tireModalTitle').textContent = tire ? 'Editar pneu' : 'Novo pneu';
+    document.getElementById('fMarca').value = tire?.marca || '';
+    document.getElementById('fMedida').value = tire?.medida || '';
+    document.getElementById('fStatus').value = tire?.status || 'novo';
+    document.getElementById('fLocal').value = tire?.localizacao || '';
+    document.getElementById('fQtd').value = tire?.quantidade ?? 0;
+    document.getElementById('fMin').value = tire?.estoqueMinimo ?? 2;
+    document.getElementById('fCusto').value = tire?.precoCusto ?? '';
+    document.getElementById('fVenda').value = tire?.precoVenda ?? '';
+    overlay.classList.add('open');
+  }
+  function closeTireModal() { overlay.classList.remove('open'); editingId = null; }
+  document.getElementById('btnNovoPneu').addEventListener('click', () => openTireModal(null));
+  document.getElementById('closeTireModal').addEventListener('click', closeTireModal);
+  document.getElementById('cancelTireModal').addEventListener('click', closeTireModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeTireModal(); });
+
+  document.getElementById('saveTireModal').addEventListener('click', async () => {
+    const marca = document.getElementById('fMarca').value.trim();
+    const medida = document.getElementById('fMedida').value.trim();
+    if (!marca || !medida) { toast('Preencha ao menos marca e medida.'); return; }
+    const data = {
+      marca, medida,
+      status: document.getElementById('fStatus').value,
+      localizacao: document.getElementById('fLocal').value.trim(),
+      quantidade: Number(document.getElementById('fQtd').value) || 0,
+      estoqueMinimo: Number(document.getElementById('fMin').value) || 0,
+      precoCusto: Number(document.getElementById('fCusto').value) || 0,
+      precoVenda: Number(document.getElementById('fVenda').value) || 0,
+    };
+    try {
+      if (editingId) {
+        await api('PUT', '/api/pneus/' + editingId, data);
+        toast('Pneu atualizado.');
+        closeTireModal();
+        return;
+      }
+      await api('POST', '/api/pneus', data);
+      toast('Pneu cadastrado.');
+      closeTireModal();
+    } catch (e) {
+      if (e.status === 409 && e.payload?.existente) {
+        const ex = e.payload.existente;
+        const somar = confirm(
+          `${e.message}\n\nDeseja somar ${data.quantidade || 0} unidade(s) a esse cadastro já existente, em vez de criar um novo?`
+        );
+        if (somar) {
+          try {
+            await api('POST', '/api/pneus/' + ex.id + '/somar', { quantidade: data.quantidade || 0 });
+            toast(`Quantidade somada ao pneu existente (${ex.marca} · ${ex.medida}).`);
+            closeTireModal();
+          } catch (e2) { toast(e2.message); }
+        } else {
+          toast('Cadastro cancelado — nenhum pneu duplicado foi criado.');
+        }
+        return;
+      }
+      toast(e.message);
+    }
+  });
+
+  async function deleteTire(id) {
+    if (!confirm('Remover este pneu do estoque? Essa ação não pode ser desfeita.')) return;
+    try { await api('DELETE', '/api/pneus/' + id); toast('Pneu removido.'); }
+    catch (e) { toast(e.message); }
+  }
+
+  // ---------- Movements ----------
+  document.getElementById('btnRegistrarMov').addEventListener('click', async () => {
+    const pneuId = document.getElementById('movPneuSelect').value;
+    const tipo = document.getElementById('movTipo').value;
+    const quantidade = Number(document.getElementById('movQtd').value);
+    const motivo = document.getElementById('movMotivo').value.trim();
+    if (!pneuId) { toast('Selecione um pneu.'); return; }
+    if (!quantidade || quantidade <= 0) { toast('Informe uma quantidade válida.'); return; }
+    try {
+      await api('POST', '/api/movimentos', { pneuId, tipo, quantidade, motivo });
+      document.getElementById('movQtd').value = 1;
+      document.getElementById('movMotivo').value = '';
+      toast(tipo === 'entrada' ? 'Entrada registrada.' : 'Saída registrada.');
+    } catch (e) { toast(e.message); }
+  });
+
+  // ---------- Garantias ----------
+  function statusGarantia(g) {
+    if (g.saidaEm) return 'finalizado';
+    if (g.analiseEm) return g.resultado === 'aprovado' ? 'aprovado' : 'reprovado';
+    if (g.envioEm) return 'na_fabrica';
+    return 'recebido';
+  }
+  const G_LABEL = {
+    recebido: 'Na loja',
+    na_fabrica: 'Na fábrica',
+    aprovado: 'Aprovado pela fábrica',
+    reprovado: 'Reprovado pela fábrica',
+    finalizado: 'Finalizado / entregue',
+  };
+  function garantiaBadge(g) {
+    const st = statusGarantia(g);
+    return `<span class="badge ${st}">${G_LABEL[st]}</span>`;
+  }
+
+  // -- modal de chegada / edição --
+  const gOverlay = document.getElementById('garantiaModalOverlay');
+  function openGarantiaModal(g) {
+    editingGarantiaId = g ? g.id : null;
+    document.getElementById('garantiaModalTitle').textContent = g ? 'Editar dados da garantia' : 'Chegada de pneu em garantia';
+    document.getElementById('gCliente').value = g?.cliente || '';
+    document.getElementById('gTelefone').value = g?.telefone || '';
+    document.getElementById('gVeiculo').value = g?.veiculo || '';
+    document.getElementById('gMarca').value = g?.marca || '';
+    document.getElementById('gMedida').value = g?.medida || '';
+    document.getElementById('gQtd').value = g?.quantidade ?? 1;
+    document.getElementById('gSerie').value = g?.serie || '';
+    document.getElementById('gNota').value = g?.notaFiscal || '';
+    document.getElementById('gDefeito').value = g?.defeito || '';
+    document.getElementById('gChegadaEm').value = toInputDateTime(g?.chegadaEm);
+    document.getElementById('gObsChegada').value = '';
+    document.getElementById('gObsChegadaField').style.display = g ? 'none' : 'grid';
+    gOverlay.classList.add('open');
+  }
+  function closeGarantiaModal() { gOverlay.classList.remove('open'); editingGarantiaId = null; }
+  document.getElementById('btnNovaGarantia').addEventListener('click', () => openGarantiaModal(null));
+  document.getElementById('closeGarantiaModal').addEventListener('click', closeGarantiaModal);
+  document.getElementById('cancelGarantiaModal').addEventListener('click', closeGarantiaModal);
+  gOverlay.addEventListener('click', (e) => { if (e.target === gOverlay) closeGarantiaModal(); });
+
+  document.getElementById('saveGarantiaModal').addEventListener('click', async () => {
+    const payload = {
+      cliente: document.getElementById('gCliente').value.trim(),
+      telefone: document.getElementById('gTelefone').value.trim(),
+      veiculo: document.getElementById('gVeiculo').value.trim(),
+      marca: document.getElementById('gMarca').value.trim(),
+      medida: document.getElementById('gMedida').value.trim(),
+      quantidade: Number(document.getElementById('gQtd').value) || 1,
+      serie: document.getElementById('gSerie').value.trim(),
+      notaFiscal: document.getElementById('gNota').value.trim(),
+      defeito: document.getElementById('gDefeito').value.trim(),
+      chegadaEm: document.getElementById('gChegadaEm').value,
+      obsChegada: document.getElementById('gObsChegada').value.trim(),
+    };
+    if (!payload.cliente || !payload.marca || !payload.medida) { toast('Preencha cliente, marca e medida.'); return; }
+    try {
+      if (editingGarantiaId) { await api('PUT', '/api/garantias/' + editingGarantiaId, payload); toast('Garantia atualizada.'); }
+      else { await api('POST', '/api/garantias', payload); toast('Chegada de garantia registrada.'); }
+      closeGarantiaModal();
+    } catch (e) { toast(e.message); }
+  });
+
+  // -- modal de etapa (envio / análise / saída) --
+  const eOverlay = document.getElementById('etapaModalOverlay');
+  const ETAPA_INFO = {
+    envio: { titulo: 'Ida para a fábrica', botao: 'Registrar envio' },
+    analise: { titulo: 'Resultado da análise da fábrica', botao: 'Lançar resultado' },
+    saida: { titulo: 'Saída do pneu', botao: 'Registrar saída' },
+  };
+  function openEtapaModal(id, etapa) {
+    const g = warranties.find(x => x.id === id);
+    if (!g) return;
+    etapaCtx = { id, etapa };
+    document.getElementById('etapaModalTitle').textContent = ETAPA_INFO[etapa].titulo;
+    document.getElementById('saveEtapaModal').textContent = ETAPA_INFO[etapa].botao;
+    document.getElementById('etapaResumo').textContent = `${g.cliente} · ${g.marca} ${g.medida} (${g.quantidade} un.)`;
+    document.getElementById('etapaResultadoField').style.display = etapa === 'analise' ? 'grid' : 'none';
+    document.getElementById('etapaResultado').value = 'aprovado';
+    document.getElementById('etapaQuando').value = toInputDateTime(Date.now());
+    document.getElementById('etapaObs').value = '';
+    const baixaBox = document.getElementById('etapaBaixaBox');
+    baixaBox.style.display = etapa === 'saida' ? 'block' : 'none';
+    document.getElementById('etapaBaixaCheck').checked = false;
+    document.getElementById('etapaBaixaFields').style.display = 'none';
+    document.getElementById('etapaBaixaQtd').value = g.quantidade || 1;
+    renderBaixaSelect();
+    eOverlay.classList.add('open');
+  }
+  function closeEtapaModal() { eOverlay.classList.remove('open'); etapaCtx = null; }
+  document.getElementById('closeEtapaModal').addEventListener('click', closeEtapaModal);
+  document.getElementById('cancelEtapaModal').addEventListener('click', closeEtapaModal);
+  eOverlay.addEventListener('click', (e) => { if (e.target === eOverlay) closeEtapaModal(); });
+  document.getElementById('etapaBaixaCheck').addEventListener('change', (e) => {
+    document.getElementById('etapaBaixaFields').style.display = e.target.checked ? 'grid' : 'none';
+  });
+
+  function renderBaixaSelect() {
+    const sel = document.getElementById('etapaBaixaPneu');
+    if (!sel) return;
+    const sorted = tires.slice().sort((a, b) => (a.marca || '').localeCompare(b.marca || ''));
+    sel.innerHTML = '<option value="">Selecione…</option>' + sorted.map(t =>
+      `<option value="${t.id}">${escapeHtml(t.marca)} · ${escapeHtml(t.medida)} (${t.quantidade ?? 0} em estoque)</option>`
+    ).join('');
+  }
+
+  document.getElementById('saveEtapaModal').addEventListener('click', async () => {
+    if (!etapaCtx) return;
+    const body = {
+      etapa: etapaCtx.etapa,
+      quando: document.getElementById('etapaQuando').value,
+      obs: document.getElementById('etapaObs').value.trim(),
+    };
+    if (etapaCtx.etapa === 'analise') body.resultado = document.getElementById('etapaResultado').value;
+    if (etapaCtx.etapa === 'saida' && document.getElementById('etapaBaixaCheck').checked) {
+      const pneuId = document.getElementById('etapaBaixaPneu').value;
+      if (!pneuId) { toast('Selecione o pneu do estoque para dar baixa.'); return; }
+      body.pneuIdBaixa = pneuId;
+      body.qtdBaixa = Number(document.getElementById('etapaBaixaQtd').value) || 1;
+    }
+    try {
+      await api('POST', '/api/garantias/' + etapaCtx.id + '/etapa', body);
+      toast('Etapa registrada.');
+      closeEtapaModal();
+    } catch (e) { toast(e.message); }
+  });
+
+  // -- modal de ficha completa --
+  const dOverlay = document.getElementById('detalheModalOverlay');
+  function openDetalhe(id) { detalheId = id; renderDetalhe(); dOverlay.classList.add('open'); }
+  function closeDetalhe() { dOverlay.classList.remove('open'); detalheId = null; }
+  document.getElementById('closeDetalheModal').addEventListener('click', closeDetalhe);
+  document.getElementById('fecharDetalheModal').addEventListener('click', closeDetalhe);
+  dOverlay.addEventListener('click', (e) => { if (e.target === dOverlay) closeDetalhe(); });
+  document.getElementById('btnDesfazerEtapa').addEventListener('click', async () => {
+    if (!detalheId) return;
+    if (!confirm('Desfazer a última etapa registrada desta garantia?')) return;
+    try { await api('DELETE', '/api/garantias/' + detalheId + '/etapa'); toast('Última etapa desfeita.'); }
+    catch (e) { toast(e.message); }
+  });
+
+  function renderDetalhe() {
+    const box = document.getElementById('detalheBody');
+    const g = warranties.find(x => x.id === detalheId);
+    if (!box) return;
+    if (!g) { closeDetalhe(); return; }
+    const st = statusGarantia(g);
+    const fim = g.saidaEm || Date.now();
+
+    const quem = (etapa) => {
+      const h = (g.historico || []).find(x => x.etapa === etapa);
+      return h && h.usuario ? ` · lançado por ${escapeHtml(h.usuario)}` : '';
+    };
+    const linha = (titulo, ts, obs, classe, etapa) => ts
+      ? `<div class="tl-item"><div class="tl-dot ${classe}"></div><div class="tl-title">${titulo}</div><div class="tl-when">${fmtDateFull(ts)}${etapa ? quem(etapa) : ''}</div>${obs ? `<div class="tl-obs">${escapeHtml(obs)}</div>` : ''}</div>`
+      : `<div class="tl-item pending"><div class="tl-dot wait"></div><div class="tl-title">${titulo}</div><div class="tl-when">— aguardando —</div></div>`;
+
+    box.innerHTML = `
+      <div class="detail-grid">
+        <div><div class="k">Cliente</div><div class="v">${escapeHtml(g.cliente)}</div></div>
+        <div><div class="k">Telefone</div><div class="v">${escapeHtml(g.telefone || '—')}</div></div>
+        <div><div class="k">Veículo / placa</div><div class="v">${escapeHtml(g.veiculo || '—')}</div></div>
+        <div><div class="k">Situação</div><div class="v">${garantiaBadge(g)}</div></div>
+        <div><div class="k">Pneu</div><div class="v">${escapeHtml(g.marca)} · ${escapeHtml(g.medida)}</div></div>
+        <div><div class="k">Quantidade</div><div class="v">${g.quantidade} un.</div></div>
+        <div><div class="k">Nº série / DOT</div><div class="v">${escapeHtml(g.serie || '—')}</div></div>
+        <div><div class="k">Nota fiscal / OS</div><div class="v">${escapeHtml(g.notaFiscal || '—')}</div></div>
+        <div style="grid-column:1/-1;"><div class="k">Defeito relatado</div><div class="v">${escapeHtml(g.defeito || '—')}</div></div>
+        <div style="grid-column:1/-1;"><div class="k">Tempo de processo</div><div class="v">${diasEntre(g.chegadaEm, fim)} dia(s)${g.saidaEm ? '' : ' (em aberto)'}</div></div>
+      </div>
+      <div class="timeline">
+        ${linha('Chegada do pneu na loja', g.chegadaEm, (g.historico || []).find(h => h.etapa === 'chegada')?.obs, 'done', 'chegada')}
+        ${linha('Ida para a fábrica', g.envioEm, g.envioObs, 'info', 'envio')}
+        ${g.analiseEm
+          ? linha(`Análise da fábrica: ${g.resultado === 'aprovado' ? 'APROVADO' : 'REPROVADO'}`, g.analiseEm, g.analiseObs, g.resultado === 'aprovado' ? 'done' : 'bad', 'analise')
+          : linha('Análise da fábrica', null)}
+        ${linha('Saída do pneu', g.saidaEm, g.saidaObs, 'done', 'saida')}
+      </div>`;
+    document.getElementById('btnDesfazerEtapa').style.display = st === 'recebido' ? 'none' : 'inline-block';
+  }
+
+  async function deleteGarantia(id) {
+    if (!confirm('Excluir este registro de garantia? Essa ação não pode ser desfeita.')) return;
+    try { await api('DELETE', '/api/garantias/' + id); toast('Garantia excluída.'); }
+    catch (e) { toast(e.message); }
+  }
+
+  document.getElementById('gSearchInput').addEventListener('input', renderGarantias);
+  document.querySelectorAll('#gFilterChips .filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('#gFilterChips .filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      gStatusFilter = chip.dataset.gstatus;
+      renderGarantias();
+    });
+  });
+
+  function renderGarantias() {
+    const contagem = { recebido: 0, na_fabrica: 0, analisado: 0, finalizado: 0 };
+    warranties.forEach(g => {
+      const st = statusGarantia(g);
+      if (st === 'recebido') contagem.recebido++;
+      else if (st === 'na_fabrica') contagem.na_fabrica++;
+      else if (st === 'finalizado') contagem.finalizado++;
+      else contagem.analisado++;
+    });
+    document.getElementById('gStatRecebido').textContent = contagem.recebido;
+    document.getElementById('gStatFabrica').textContent = contagem.na_fabrica;
+    document.getElementById('gStatAnalisado').textContent = contagem.analisado;
+    document.getElementById('gStatFinalizado').textContent = contagem.finalizado;
+
+    const q = (document.getElementById('gSearchInput')?.value || '').trim().toLowerCase();
+    let list = warranties.slice();
+    if (q) list = list.filter(g => [g.cliente, g.telefone, g.veiculo, g.marca, g.medida, g.serie, g.notaFiscal].join(' ').toLowerCase().includes(q));
+    if (gStatusFilter === 'andamento') list = list.filter(g => statusGarantia(g) !== 'finalizado');
+    else if (gStatusFilter === 'analisado') list = list.filter(g => ['aprovado', 'reprovado'].includes(statusGarantia(g)));
+    else if (gStatusFilter !== 'todos') list = list.filter(g => statusGarantia(g) === gStatusFilter);
+    list.sort((a, b) => (b.chegadaEm || 0) - (a.chegadaEm || 0));
+
+    const tbody = document.getElementById('garantiaTableBody');
+    const empty = document.getElementById('garantiaEmptyState');
+    if (list.length === 0) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
+    empty.style.display = 'none';
+
+    tbody.innerHTML = list.map(g => {
+      const st = statusGarantia(g);
+      let acao = '';
+      if (st === 'recebido') acao = `<button class="btn-secondary btn-sm" data-etapa="envio" data-id="${g.id}">Enviar p/ fábrica</button>`;
+      else if (st === 'na_fabrica') acao = `<button class="btn-secondary btn-sm" data-etapa="analise" data-id="${g.id}">Lançar resultado</button>`;
+      else if (st === 'aprovado' || st === 'reprovado') acao = `<button class="btn-primary btn-sm" data-etapa="saida" data-id="${g.id}">Registrar saída</button>`;
+      const analiseCel = g.analiseEm
+        ? `${fmtDate(g.analiseEm)}<br><span class="badge ${g.resultado}">${g.resultado === 'aprovado' ? 'Aprovado' : 'Reprovado'}</span>`
+        : '—';
+      return `
+        <tr>
+          <td><div class="cell-main">${escapeHtml(g.cliente)}</div><div style="font-size:11.5px;color:var(--text-faint);">${escapeHtml(g.veiculo || g.telefone || '')}</div></td>
+          <td><div class="cell-main">${escapeHtml(g.marca)}</div><div class="mono">${escapeHtml(g.medida)}</div></td>
+          <td>${g.quantidade}</td>
+          <td>${garantiaBadge(g)}</td>
+          <td class="mono">${fmtDate(g.chegadaEm)}</td>
+          <td class="mono">${g.envioEm ? fmtDate(g.envioEm) : '—'}</td>
+          <td class="mono">${analiseCel}</td>
+          <td class="mono">${g.saidaEm ? fmtDate(g.saidaEm) : '—'}</td>
+          <td style="text-align:right;white-space:nowrap;">
+            ${acao}
+            <button class="btn-ghost btn-sm" data-ficha="${g.id}">Ficha</button>
+            <button class="btn-ghost btn-sm" data-gedit="${g.id}">Editar</button>
+            <button class="btn-danger-ghost btn-sm" data-gdel="${g.id}">Excluir</button>
+          </td>
+        </tr>`;
+    }).join('');
+
+    tbody.querySelectorAll('[data-etapa]').forEach(b => b.addEventListener('click', () => openEtapaModal(b.dataset.id, b.dataset.etapa)));
+    tbody.querySelectorAll('[data-ficha]').forEach(b => b.addEventListener('click', () => openDetalhe(b.dataset.ficha)));
+    tbody.querySelectorAll('[data-gedit]').forEach(b => b.addEventListener('click', () => openGarantiaModal(warranties.find(g => g.id === b.dataset.gedit))));
+    tbody.querySelectorAll('[data-gdel]').forEach(b => b.addEventListener('click', () => deleteGarantia(b.dataset.gdel)));
+  }
+
+  // ---------- Filters / search ----------
+  document.getElementById('searchInput').addEventListener('input', renderTireTable);
+  document.getElementById('localSearchInput').addEventListener('input', renderLocalizacao);
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      statusFilter = chip.dataset.status;
+      renderTireTable();
+    });
+  });
+
+  // ---------- Bebidas ----------
+  const bebOverlay = document.getElementById('bebidaModalOverlay');
+
+  function openBebidaModal(b) {
+    editingBebidaId = b ? b.id : null;
+    document.getElementById('bebidaModalTitle').textContent = b ? 'Editar bebida' : 'Nova bebida';
+    document.getElementById('bNome').value = b?.nome || '';
+    document.getElementById('bQtd').value = b ? (b.quantidade ?? 0) : 0;
+    document.getElementById('bQtdLabel').textContent = b ? 'Estoque atual (corrigir)' : 'Quantidade em estoque (inicial)';
+    document.getElementById('bQtdDica').style.display = b ? 'block' : 'none';
+    bebOverlay.classList.add('open');
+  }
+  function closeBebidaModal() { bebOverlay.classList.remove('open'); editingBebidaId = null; }
+  document.getElementById('btnNovaBebida').addEventListener('click', () => openBebidaModal(null));
+  document.getElementById('closeBebidaModal').addEventListener('click', closeBebidaModal);
+  document.getElementById('cancelBebidaModal').addEventListener('click', closeBebidaModal);
+  bebOverlay.addEventListener('click', (e) => { if (e.target === bebOverlay) closeBebidaModal(); });
+
+  document.getElementById('saveBebidaModal').addEventListener('click', async () => {
+    const nome = document.getElementById('bNome').value.trim();
+    const qtdTxt = document.getElementById('bQtd').value;
+    const quantidade = qtdTxt === '' ? 0 : Number(qtdTxt);
+    if (!nome) { toast('Informe o nome da bebida.'); return; }
+    if (!Number.isInteger(quantidade) || quantidade < 0) { toast('A quantidade deve ser um número inteiro, 0 ou mais.'); return; }
+    try {
+      if (editingBebidaId) {
+        await api('PUT', '/api/bebidas/' + editingBebidaId, { nome, quantidade });
+        toast('Bebida atualizada.');
+      } else {
+        await api('POST', '/api/bebidas', { nome, quantidade });
+        toast('Bebida cadastrada.');
+      }
+      closeBebidaModal();
+    } catch (e) { toast(e.message); }
+  });
+
+  async function deleteBebida(id) {
+    const b = drinks.find(x => x.id === id);
+    if (!confirm(`Remover "${b ? b.nome : 'esta bebida'}" da lista? O histórico de movimentações dela continua guardado.`)) return;
+    try { await api('DELETE', '/api/bebidas/' + id); toast('Bebida removida.'); }
+    catch (e) { toast(e.message); }
+  }
+
+  // Muda o texto do campo conforme seja entrada ou saída
+  function ajustarCampoDestino() {
+    const saida = document.getElementById('bebMovTipo').value === 'saida';
+    document.getElementById('bebMovDestinoLabel').textContent = saida ? 'Para onde saiu' : 'Observação (opcional)';
+    document.getElementById('bebMovDestino').placeholder = saida
+      ? 'Ex: geladeira do balcão, cliente, funcionário…'
+      : 'Ex: compra no fornecedor, reposição…';
+  }
+  document.getElementById('bebMovTipo').addEventListener('change', ajustarCampoDestino);
+
+  document.getElementById('btnBebMov').addEventListener('click', async () => {
+    const bebidaId = document.getElementById('bebMovSelect').value;
+    const tipo = document.getElementById('bebMovTipo').value;
+    const quantidade = Number(document.getElementById('bebMovQtd').value);
+    const destino = document.getElementById('bebMovDestino').value.trim();
+    if (!bebidaId) { toast('Selecione uma bebida.'); return; }
+    if (!Number.isInteger(quantidade) || quantidade <= 0) { toast('Informe uma quantidade inteira maior que zero.'); return; }
+    if (tipo === 'saida' && !destino) { toast('Informe para onde a bebida saiu.'); return; }
+    try {
+      await api('POST', '/api/bebidas/movimentos', { bebidaId, tipo, quantidade, destino });
+      document.getElementById('bebMovQtd').value = 1;
+      document.getElementById('bebMovDestino').value = '';
+      toast(tipo === 'entrada' ? 'Entrada registrada.' : 'Saída registrada.');
+    } catch (e) { toast(e.message); }
+  });
+
+  function bebMoveHtml(m) {
+    const sign = m.tipo === 'entrada' ? '+' : '−';
+    const detalhe = m.destino
+      ? (m.tipo === 'saida' ? ' · para ' : ' · ') + escapeHtml(m.destino)
+      : '';
+    const apos = (m.estoqueApos !== undefined && m.estoqueApos !== null) ? ` · estoque ficou em ${m.estoqueApos}` : '';
+    return `
+      <div class="move-item">
+        <div class="move-icon ${m.tipo}">${m.tipo === 'entrada' ? '↓' : '↑'}</div>
+        <div class="move-info">
+          <div class="title">${escapeHtml(m.bebidaNome || 'Bebida removida')}</div>
+          <div class="meta">${fmtDate(m.criadoEm)}${detalhe}${m.usuario ? ' · por ' + escapeHtml(m.usuario) : ''}${apos}</div>
+        </div>
+        <div class="move-qty ${m.tipo}">${sign}${m.quantidade}</div>
+      </div>`;
+  }
+
+  function renderBebidas() {
+    const sorted = drinks.slice().sort((a, b) => (a.nome || '').localeCompare(b.nome || '', 'pt-BR'));
+
+    // cartões
+    document.getElementById('bebStatTipos').textContent = sorted.length;
+    document.getElementById('bebStatUnidades').textContent = sorted.reduce((s, b) => s + (Number(b.quantidade) || 0), 0);
+
+    // seletor do formulário (mantém a bebida escolhida)
+    const sel = document.getElementById('bebMovSelect');
+    const atual = sel.value;
+    sel.innerHTML = '<option value="">Selecione uma bebida…</option>' + sorted.map(b =>
+      `<option value="${b.id}">${escapeHtml(b.nome)} (${b.quantidade ?? 0} em estoque)</option>`
+    ).join('');
+    if (sorted.some(b => b.id === atual)) sel.value = atual;
+
+    // tabela de estoque
+    const tbody = document.getElementById('bebidaTableBody');
+    const vazio = document.getElementById('bebidaEmptyState');
+    if (sorted.length === 0) {
+      tbody.innerHTML = '';
+      vazio.style.display = 'block';
+    } else {
+      vazio.style.display = 'none';
+      tbody.innerHTML = sorted.map(b => {
+        const zerado = (Number(b.quantidade) || 0) <= 0;
+        return `
+          <tr class="${zerado ? 'row-alert' : ''}">
+            <td><div class="cell-main">${escapeHtml(b.nome)}</div></td>
+            <td><span class="qty-badge ${zerado ? 'low' : ''}">${b.quantidade ?? 0}</span> ${zerado ? '<span class="badge alerta">sem estoque</span>' : ''}</td>
+            <td style="text-align:right; white-space:nowrap;">
+              <button class="btn-ghost btn-sm" data-bedit="${b.id}">Editar</button>
+              <button class="btn-danger-ghost btn-sm" data-bdel="${b.id}">Excluir</button>
+            </td>
+          </tr>`;
+      }).join('');
+      tbody.querySelectorAll('[data-bedit]').forEach(x => x.addEventListener('click', () => openBebidaModal(drinks.find(b => b.id === x.dataset.bedit))));
+      tbody.querySelectorAll('[data-bdel]').forEach(x => x.addEventListener('click', () => deleteBebida(x.dataset.bdel)));
+    }
+
+    // histórico
+    const hist = drinkMoves.slice().sort((a, b) => (b.criadoEm || 0) - (a.criadoEm || 0));
+    document.getElementById('bebMoveList').innerHTML = hist.length === 0
+      ? '<div class="empty-state"><p>Nenhuma movimentação de bebida registrada ainda.</p></div>'
+      : hist.slice(0, 100).map(bebMoveHtml).join('');
+  }
+
+  // ---------- Rendering ----------
+  function isLow(t) { return Number(t.quantidade) <= Number(t.estoqueMinimo ?? 0); }
+  function statusLabel(t) { return { novo: 'Novo', remoldado: 'Remoldado' }[t.status] || t.status; }
+  function statusBadge(t) {
+    return `<span class="badge ${t.status}">${escapeHtml(statusLabel(t))}</span>`;
+  }
+
+  function renderTireTable() {
+    const q = document.getElementById('searchInput').value.trim().toLowerCase();
+    let list = tires.slice();
+    if (q) list = list.filter(t => [t.marca, t.medida].join(' ').toLowerCase().includes(q));
+    if (statusFilter === 'alerta') list = list.filter(isLow);
+    else if (statusFilter !== 'todos') list = list.filter(t => t.status === statusFilter);
+    list.sort((a, b) => (a.marca || '').localeCompare(b.marca || ''));
+
+    const tbody = document.getElementById('tireTableBody');
+    const empty = document.getElementById('tireEmptyState');
+    if (list.length === 0) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
+    empty.style.display = 'none';
+    tbody.innerHTML = list.map(t => {
+      const low = isLow(t);
+      return `
+        <tr class="${low ? 'row-alert' : ''}">
+          <td><div class="cell-main">${escapeHtml(t.marca)}</div></td>
+          <td class="mono">${escapeHtml(t.medida)}</td>
+          <td>${statusBadge(t)} ${low ? '<span class="badge alerta">⚠ baixo</span>' : ''}</td>
+          <td>${escapeHtml(t.localizacao || '—')}</td>
+          <td><span class="qty-badge ${low ? 'low' : ''}">${t.quantidade ?? 0}</span></td>
+          <td>${fmtBRL(t.precoCusto)}</td>
+          <td>${fmtBRL(t.precoVenda)}</td>
+          <td style="text-align:right; white-space:nowrap;">
+            <button class="btn-ghost btn-sm" data-edit="${t.id}">Editar</button>
+            <button class="btn-danger-ghost btn-sm" data-del="${t.id}">Excluir</button>
+          </td>
+        </tr>`;
+    }).join('');
+    tbody.querySelectorAll('[data-edit]').forEach(b => b.addEventListener('click', () => openTireModal(tires.find(t => t.id === b.dataset.edit))));
+    tbody.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => deleteTire(b.dataset.del)));
+  }
+
+  function renderMoveSelect() {
+    const sel = document.getElementById('movPneuSelect');
+    const current = sel.value;
+    const sorted = tires.slice().sort((a, b) => (a.marca || '').localeCompare(b.marca || ''));
+    sel.innerHTML = '<option value="">Selecione um pneu…</option>' + sorted.map(t =>
+      `<option value="${t.id}">${escapeHtml(t.marca)} · ${escapeHtml(t.medida)} (${t.quantidade ?? 0} em estoque)</option>`
+    ).join('');
+    if (sorted.some(t => t.id === current)) sel.value = current;
+  }
+
+  function moveItemHtml(m) {
+    const sign = m.tipo === 'entrada' ? '+' : '−';
+    return `
+      <div class="move-item">
+        <div class="move-icon ${m.tipo}">${m.tipo === 'entrada' ? '↓' : '↑'}</div>
+        <div class="move-info">
+          <div class="title">${escapeHtml(m.pneuDescricao || 'Pneu removido')}</div>
+          <div class="meta">${fmtDate(m.criadoEm)}${m.motivo ? ' · ' + escapeHtml(m.motivo) : ''}${m.usuario ? ' · por ' + escapeHtml(m.usuario) : ''}</div>
+        </div>
+        <div class="move-qty ${m.tipo}">${sign}${m.quantidade}</div>
+      </div>`;
+  }
+
+  function renderMoves() {
+    const sorted = moves.slice().sort((a, b) => (b.criadoEm || 0) - (a.criadoEm || 0));
+    const dashEl = document.getElementById('dashMoveList');
+    const fullEl = document.getElementById('fullMoveList');
+    if (sorted.length === 0) {
+      dashEl.innerHTML = '<div class="empty-state"><p>Nenhuma movimentação registrada ainda.</p></div>';
+      fullEl.innerHTML = '<div class="empty-state"><p>Nenhuma movimentação registrada ainda.</p></div>';
+      return;
+    }
+    dashEl.innerHTML = sorted.slice(0, 6).map(moveItemHtml).join('');
+    fullEl.innerHTML = sorted.slice(0, 100).map(moveItemHtml).join('');
+  }
+
+  function renderDashboard() {
+    const skus = tires.length;
+    const unidades = tires.reduce((s, t) => s + (Number(t.quantidade) || 0), 0);
+    const valor = tires.reduce((s, t) => s + (Number(t.quantidade) || 0) * (Number(t.precoCusto) || 0), 0);
+    const alertas = tires.filter(isLow);
+
+    document.getElementById('statSkus').textContent = skus;
+    document.getElementById('statUnidades').textContent = unidades;
+    document.getElementById('statValor').textContent = fmtBRL(valor);
+    document.getElementById('statAlertas').textContent = alertas.length;
+
+    const alertList = document.getElementById('alertList');
+    alertList.innerHTML = alertas.length === 0
+      ? '<div class="empty-state"><p>Nenhum alerta de estoque por agora.</p></div>'
+      : alertas.map(t => `
+        <div class="move-item">
+          <div class="move-icon saida">!</div>
+          <div class="move-info">
+            <div class="title">${escapeHtml(t.marca)} · ${escapeHtml(t.medida)}</div>
+            <div class="meta">Estoque mínimo: ${t.estoqueMinimo ?? 0} un.</div>
+          </div>
+          <div class="move-qty saida">${t.quantidade ?? 0} un.</div>
+        </div>`).join('');
+
+    const gBox = document.getElementById('dashGarantias');
+    if (gBox) {
+      const abertas = warranties.filter(g => !g.saidaEm).sort((a, b) => (a.chegadaEm || 0) - (b.chegadaEm || 0));
+      gBox.innerHTML = abertas.length === 0
+        ? '<div class="empty-state"><p>Nenhuma garantia em andamento.</p></div>'
+        : abertas.slice(0, 8).map(g => `
+          <div class="move-item">
+            <div class="move-icon entrada">🛡</div>
+            <div class="move-info">
+              <div class="title">${escapeHtml(g.cliente)} · ${escapeHtml(g.marca)} ${escapeHtml(g.medida)}</div>
+              <div class="meta">Chegou em ${fmtDate(g.chegadaEm)} · ${diasEntre(g.chegadaEm, Date.now())} dia(s) em aberto</div>
+            </div>
+            <div>${garantiaBadge(g)}</div>
+          </div>`).join('');
+    }
+  }
+
+  function renderLocalizacao() {
+    const q = (document.getElementById('localSearchInput')?.value || '').trim().toLowerCase();
+    const container = document.getElementById('localGroupList');
+    if (!container) return;
+
+    let list = tires.slice();
+    if (q) {
+      list = list.filter(t =>
+        [t.localizacao, t.marca, t.medida].join(' ').toLowerCase().includes(q)
+      );
+    }
+
+    if (list.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="big">📍</div>
+          <p><strong>Nada encontrado.</strong></p>
+          <p>Tente buscar por outro local, marca ou medida.</p>
+        </div>`;
+      return;
+    }
+
+    const groups = {};
+    list.forEach(t => {
+      const key = (t.localizacao || '').trim() || 'Sem localização definida';
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(t);
+    });
+
+    const keys = Object.keys(groups).sort((a, b) => {
+      if (a === 'Sem localização definida') return 1;
+      if (b === 'Sem localização definida') return -1;
+      return a.localeCompare(b);
+    });
+
+    container.innerHTML = keys.map(key => {
+      const items = groups[key].sort((a, b) => (a.marca || '').localeCompare(b.marca || ''));
+      const totalUn = items.reduce((s, t) => s + (Number(t.quantidade) || 0), 0);
+      return `
+        <div class="loc-group">
+          <div class="loc-group-header">
+            <div class="loc-name"><span class="pin">📍</span> ${escapeHtml(key)}</div>
+            <div class="loc-count">${items.length} tipo(s) · ${totalUn} un.</div>
+          </div>
+          <div class="loc-items">
+            ${items.map(t => {
+              const low = isLow(t);
+              return `
+                <div class="loc-item">
+                  <div class="info">
+                    <div class="t">${escapeHtml(t.marca)} · ${escapeHtml(t.medida)}</div>
+                    <div class="s">${escapeHtml(statusLabel(t))}</div>
+                  </div>
+                  <div class="qty" style="color: ${low ? 'var(--bad)' : 'var(--text)'};">${t.quantidade ?? 0} un.</div>
+                </div>`;
+            }).join('')}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function renderAll() {
+    renderDashboard();
+    renderTireTable();
+    renderMoveSelect();
+    renderMoves();
+    renderLocalizacao();
+    renderGarantias();
+    renderBebidas();
+    if (detalheId) renderDetalhe();
+    if (etapaCtx && etapaCtx.etapa === 'saida') renderBaixaSelect();
+  }
+
+  // ---------- Usuário logado ----------
+  const PERFIL_LABEL = { admin: 'Administrador', operador: 'Operador' };
+
+  function aplicarUsuario(u) {
+    meuUsuario = u;
+    document.getElementById('userPill').style.display = 'inline-flex';
+    document.getElementById('userNome').textContent = u.nome;
+    document.getElementById('userPerfil').textContent = u.perfil === 'admin' ? 'admin' : '';
+    document.getElementById('tabUsuarios').style.display = u.perfil === 'admin' ? 'block' : 'none';
+    document.getElementById('tabAuditoria').style.display = u.perfil === 'admin' ? 'block' : 'none';
+    if (u.perfil === 'admin') { carregarUsuarios(); carregarBackups(); carregarAuditoria(); }
+  }
+
+  // Atualiza a lista toda vez que a pessoa reabre essas abas
+  const tabUsuariosBtn = document.getElementById('tabUsuarios');
+  if (tabUsuariosBtn) tabUsuariosBtn.addEventListener('click', () => { carregarUsuarios(); carregarBackups(); });
+  const tabAuditoriaBtn = document.getElementById('tabAuditoria');
+  if (tabAuditoriaBtn) tabAuditoriaBtn.addEventListener('click', carregarAuditoria);
+
+  // ---------- Tema claro/escuro ----------
+  function aplicarTema(tema) {
+    document.documentElement.setAttribute('data-theme', tema);
+    document.getElementById('btnTema').textContent = tema === 'light' ? '☀️' : '🌙';
+    try { localStorage.setItem('unicar_tema', tema); } catch (e) {}
+  }
+  document.getElementById('btnTema').addEventListener('click', () => {
+    const atual = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    aplicarTema(atual === 'light' ? 'dark' : 'light');
+  });
+  aplicarTema(document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+
+  document.getElementById('btnSair').addEventListener('click', async () => {
+    if (!confirm('Sair do sistema neste aparelho?')) return;
+    try { await fetch('/api/logout', { method: 'POST' }); } catch (e) {}
+    window.location.href = '/login.html';
+  });
+
+  // -- trocar a própria senha --
+  const sOverlay = document.getElementById('senhaModalOverlay');
+  function openSenhaModal(aviso) {
+    document.getElementById('sAtual').value = '';
+    document.getElementById('sNova').value = '';
+    document.getElementById('sNova2').value = '';
+    const avisoBox = document.getElementById('senhaAviso');
+    avisoBox.style.display = aviso ? 'block' : 'none';
+    avisoBox.textContent = aviso || '';
+    sOverlay.classList.add('open');
+  }
+  function closeSenhaModal() { sOverlay.classList.remove('open'); }
+  document.getElementById('btnMinhaSenha').addEventListener('click', () => openSenhaModal(null));
+  document.getElementById('closeSenhaModal').addEventListener('click', closeSenhaModal);
+  document.getElementById('cancelSenhaModal').addEventListener('click', closeSenhaModal);
+  sOverlay.addEventListener('click', (e) => { if (e.target === sOverlay) closeSenhaModal(); });
+
+  document.getElementById('saveSenhaModal').addEventListener('click', async () => {
+    const atual = document.getElementById('sAtual').value;
+    const nova = document.getElementById('sNova').value;
+    const nova2 = document.getElementById('sNova2').value;
+    if (nova.length < 4) { toast('A nova senha precisa ter pelo menos 4 caracteres.'); return; }
+    if (nova !== nova2) { toast('As duas senhas novas não são iguais.'); return; }
+    try {
+      await api('POST', '/api/minha-senha', { senhaAtual: atual, novaSenha: nova });
+      toast('Senha alterada.');
+      closeSenhaModal();
+    } catch (e) { toast(e.message); }
+  });
+
+  // -- administração de usuários --
+  const uOverlay = document.getElementById('usuarioModalOverlay');
+  function openUsuarioModal(u) {
+    editingUsuarioId = u ? u.id : null;
+    document.getElementById('usuarioModalTitle').textContent = u ? 'Editar usuário' : 'Novo usuário';
+    document.getElementById('uNome').value = u?.nome || '';
+    document.getElementById('uLogin').value = u?.usuario || '';
+    document.getElementById('uLoginField').style.display = u ? 'none' : 'grid';
+    document.getElementById('uSenha').value = '';
+    document.getElementById('uSenhaLabel').textContent = u ? 'Nova senha (deixe em branco para não mexer)' : 'Senha';
+    document.getElementById('uSenhaDica').textContent = u
+      ? 'Se você definir uma senha aqui, a pessoa será desconectada e entrará com a senha nova.'
+      : 'A pessoa poderá trocar essa senha depois, em "Minha senha".';
+    document.getElementById('uPerfil').value = u?.perfil || 'operador';
+    document.getElementById('uAtivoField').style.display = u ? 'grid' : 'none';
+    document.getElementById('uAtivo').value = u && u.ativo === false ? 'nao' : 'sim';
+    uOverlay.classList.add('open');
+  }
+  function closeUsuarioModal() { uOverlay.classList.remove('open'); editingUsuarioId = null; }
+  document.getElementById('btnNovoUsuario').addEventListener('click', () => openUsuarioModal(null));
+  document.getElementById('closeUsuarioModal').addEventListener('click', closeUsuarioModal);
+  document.getElementById('cancelUsuarioModal').addEventListener('click', closeUsuarioModal);
+  uOverlay.addEventListener('click', (e) => { if (e.target === uOverlay) closeUsuarioModal(); });
+
+  document.getElementById('saveUsuarioModal').addEventListener('click', async () => {
+    const nome = document.getElementById('uNome').value.trim();
+    const senha = document.getElementById('uSenha').value;
+    const perfil = document.getElementById('uPerfil').value;
+    if (!nome) { toast('Informe o nome da pessoa.'); return; }
+    try {
+      if (editingUsuarioId) {
+        const corpo = { nome, perfil, ativo: document.getElementById('uAtivo').value === 'sim' };
+        if (senha) corpo.senha = senha;
+        await api('PUT', '/api/usuarios/' + editingUsuarioId, corpo);
+        toast('Usuário atualizado.');
+      } else {
+        const login = document.getElementById('uLogin').value.trim().toLowerCase();
+        if (!login) { toast('Informe o usuário de acesso.'); return; }
+        if (senha.length < 4) { toast('A senha precisa ter pelo menos 4 caracteres.'); return; }
+        await api('POST', '/api/usuarios', { nome, usuario: login, senha, perfil });
+        toast('Usuário criado.');
+      }
+      closeUsuarioModal();
+      carregarUsuarios();
+    } catch (e) { toast(e.message); }
+  });
+
+  async function excluirUsuario(id) {
+    const u = usuarios.find(x => x.id === id);
+    if (!confirm(`Excluir o usuário "${u ? u.nome : ''}"? Ele não conseguirá mais entrar no sistema.`)) return;
+    try { await api('DELETE', '/api/usuarios/' + id); toast('Usuário excluído.'); carregarUsuarios(); }
+    catch (e) { toast(e.message); }
+  }
+
+  async function carregarUsuarios() {
+    try { usuarios = await api('GET', '/api/usuarios'); renderUsuarios(); }
+    catch (e) { /* operador não tem acesso — apenas ignora */ }
+  }
+
+  const ACAO_LABEL = { criar: 'Criou', editar: 'Editou', excluir: 'Excluiu', entrada: 'Entrada de', saida: 'Saída de' };
+  const ACAO_BADGE = { criar: 'novo', entrada: 'novo', excluir: 'alerta', saida: 'alerta' };
+  const ENTIDADE_LABEL = { pneu: 'Pneu', garantia: 'Garantia', usuario: 'Usuário', backup: 'Backup', bebida: 'Bebida' };
+
+  async function carregarAuditoria() {
+    const tbody = document.getElementById('auditoriaTableBody');
+    const vazio = document.getElementById('auditoriaEmptyState');
+    if (!tbody) return;
+    try {
+      const registros = await api('GET', '/api/auditoria?limit=300');
+      vazio.style.display = registros.length ? 'none' : 'block';
+      tbody.innerHTML = registros.map(r => `
+        <tr>
+          <td class="mono">${fmtDate(r.criadoEm)}</td>
+          <td>${escapeHtml(r.usuario)}</td>
+          <td><span class="badge ${ACAO_BADGE[r.acao] || ''}">${ACAO_LABEL[r.acao] || r.acao} ${ENTIDADE_LABEL[r.entidade] || r.entidade}</span></td>
+          <td>${escapeHtml(r.resumo)}</td>
+        </tr>`).join('');
+    } catch (e) { /* operador não tem acesso — apenas ignora */ }
+  }
+
+  function fmtBytes(n) {
+    if (n < 1024) return n + ' B';
+    if (n < 1024 * 1024) return (n / 1024).toFixed(1) + ' KB';
+    return (n / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
+  async function carregarBackups() {
+    const tbody = document.getElementById('backupTableBody');
+    if (!tbody) return;
+    try {
+      const backups = await api('GET', '/api/backups');
+      tbody.innerHTML = backups.length
+        ? backups.map(b => `
+          <tr>
+            <td class="mono">${escapeHtml(b.arquivo)}</td>
+            <td class="mono">${fmtDate(b.criadoEm)}</td>
+            <td class="mono">${fmtBytes(b.tamanho)}</td>
+            <td style="text-align:right;"><a class="btn-ghost btn-sm" href="/api/backups/${encodeURIComponent(b.arquivo)}" target="_blank" rel="noopener">Baixar</a></td>
+          </tr>`).join('')
+        : `<tr><td colspan="4" style="color:var(--text-faint);">Ainda não há backups — o primeiro é feito assim que o servidor liga.</td></tr>`;
+    } catch (e) { /* operador não tem acesso — apenas ignora */ }
+  }
+
+  document.getElementById('btnBackupAgora')?.addEventListener('click', async () => {
+    try { await api('POST', '/api/backups', {}); toast('Backup criado.'); carregarBackups(); }
+    catch (e) { toast(e.message); }
+  });
+
+  function renderUsuarios() {
+    const tbody = document.getElementById('usuarioTableBody');
+    if (!tbody) return;
+    tbody.innerHTML = usuarios.map(u => `
+      <tr>
+        <td><div class="cell-main">${escapeHtml(u.nome)}${u.id === meuUsuario?.id ? ' <span class="badge novo">você</span>' : ''}</div></td>
+        <td class="mono">${escapeHtml(u.usuario)}</td>
+        <td>${escapeHtml(PERFIL_LABEL[u.perfil] || u.perfil)}</td>
+        <td>${u.ativo === false ? '<span class="badge alerta">Bloqueado</span>' : '<span class="badge novo">Ativo</span>'}</td>
+        <td class="mono">${u.ultimoAcessoEm ? fmtDate(u.ultimoAcessoEm) : '—'}</td>
+        <td style="text-align:right;white-space:nowrap;">
+          <button class="btn-ghost btn-sm" data-uedit="${u.id}">Editar</button>
+          ${u.id === meuUsuario?.id ? '' : `<button class="btn-danger-ghost btn-sm" data-udel="${u.id}">Excluir</button>`}
+        </td>
+      </tr>`).join('');
+    tbody.querySelectorAll('[data-uedit]').forEach(b => b.addEventListener('click', () => openUsuarioModal(usuarios.find(u => u.id === b.dataset.uedit))));
+    tbody.querySelectorAll('[data-udel]').forEach(b => b.addEventListener('click', () => excluirUsuario(b.dataset.udel)));
+  }
+
+  // ---------- Socket.IO realtime sync ----------
+  const socket = io();
+  socket.on('connect', () => setConn(true));
+  socket.on('disconnect', () => setConn(false));
+  socket.on('connect_error', (err) => {
+    setConn(false);
+    // servidor recusou a conexão por falta de login
+    if (String(err && err.message) === 'nao-autenticado') window.location.href = '/login.html';
+  });
+  socket.on('state', (data) => {
+    tires = data.pneus || [];
+    moves = data.movimentos || [];
+    warranties = data.garantias || [];
+    drinks = data.bebidas || [];
+    drinkMoves = data.bebidasMov || [];
+    renderAll();
+  });
+
+  // ---------- Início ----------
+  (async function iniciar() {
+    try {
+      const res = await fetch('/api/eu');
+      if (!res.ok) { window.location.href = '/login.html'; return; }
+      const info = await res.json();
+      aplicarUsuario(info.usuario);
+      if (info.precisaTrocarSenha) {
+        openSenhaModal('Você ainda está usando a senha inicial. Defina uma senha sua agora.');
+      }
+    } catch (e) {
+      window.location.href = '/login.html';
+      return;
+    }
+    renderAll();
+  })();
+})();
+</script>
+</body>
+</html>

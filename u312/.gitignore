@@ -1,0 +1,21 @@
+# Dependencias (cada maquina instala as suas com: npm ci)
+node_modules/
+
+# Dados reais e backups: NUNCA entram no git (sao dados da loja, nao codigo)
+data.json
+data.json.*
+backups/
+BACKUPS_HERMES/
+
+# Segredos e configuracao local
+.env
+.env.local
+
+# Logs gerados em execucao
+logs/
+*.log
+
+# Lixo de sistema
+.DS_Store
+Thumbs.db
+whatsapp-sessao/

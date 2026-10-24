@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="/logos/grupo-2026-icon-32.png?v=3.0.7">
+<link rel="icon" type="image/png" sizes="192x192" href="/logos/grupo-2026-icon-192.png?v=3.0.7">
+<link rel="apple-touch-icon" sizes="192x192" href="/logos/apple-touch-icon-2026.png?v=3.0.7">
+<title>Entrar · SMG GROUP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1b1c1f;
+    --bg-elevated: #26282c;
+    --bg-sunken: #151618;
+    --text: #f2f2f0;
+    --text-muted: #b3b4b8;
+    --text-faint: #7d7e83;
+    --border: #38393e;
+    --border-strong: #4a4b52;
+    --accent: #e2231a;
+    --accent-strong: #ff3a2f;
+    --yellow: #ffd400;
+    --bad: #ff5252;
+    --bad-soft: rgba(255,82,82,0.15);
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text); min-height: 100vh;
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .card {
+    background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 16px;
+    box-shadow: var(--shadow); width: 100%; max-width: 380px; padding: 28px 26px 24px;
+  }
+  .brand { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 22px; }
+  .brand-logo { display: block; width: 132px; max-width: 55%; height: auto; background: #fff;
+    border-radius: 14px; padding: 8px; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+  .brand h1 { font-size: 19px; margin: 0; font-weight: 800; letter-spacing: -0.2px; }
+  .brand h1 .hl { color: var(--yellow); }
+  .brand p { margin: 0; font-size: 11.5px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; }
+  .field { display: grid; gap: 5px; margin-bottom: 13px; }
+  .field label { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+  input {
+    font-family: inherit; font-size: 14px; color: var(--text); background: var(--bg);
+    border: 1px solid var(--border-strong); border-radius: 8px; padding: 10px 12px; outline: none; width: 100%;
+  }
+  input:focus { border-color: var(--accent); }
+  button {
+    font-family: inherit; cursor: pointer; border-radius: 8px; font-weight: 700; font-size: 14px;
+    border: none; padding: 11px 14px; width: 100%; background: var(--accent); color: #fff; margin-top: 6px;
+  }
+  button:hover { background: var(--accent-strong); }
+  button:disabled { opacity: 0.6; cursor: default; }
+  .erro {
+    display: none; background: var(--bad-soft); color: var(--bad); border-radius: 8px;
+    padding: 9px 12px; font-size: 12.5px; font-weight: 600; margin-bottom: 13px;
+  }
+  .erro.show { display: block; }
+  .rodape { margin-top: 18px; font-size: 11.5px; color: var(--text-faint); text-align: center; line-height: 1.5; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand">
+      <img class="brand-logo" src="/logos/grupo-2026-login.png?v=3.0.7" alt="Logo do grupo">
+      <div>
+        <h1 id="marcaNome">SMG <span class="hl">GROUP</span></h1>
+        <p id="marcaSub">Gestão de estoque e serviços</p>
+      </div>
+    </div>
+
+    <div class="erro" id="erro"></div>
+
+    <div class="field">
+      <label for="usuario">Usuário</label>
+      <input id="usuario" autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false">
+    </div>
+    <div class="field">
+      <label for="senha">Senha</label>
+      <input id="senha" type="password" autocomplete="current-password">
+    </div>
+    <button id="btnEntrar">Entrar</button>
+
+    <div class="rodape">Sistema interno da loja · acesso apenas pela rede local</div>
+  </div>
+
+<script>
+(function () {
+  const erroBox = document.getElementById('erro');
+  const btn = document.getElementById('btnEntrar');
+  const campoUsuario = document.getElementById('usuario');
+  const campoSenha = document.getElementById('senha');
+
+  function mostrarErro(msg) {
+    erroBox.textContent = msg;
+    erroBox.classList.add('show');
+  }
+
+  async function entrar() {
+    const usuario = campoUsuario.value.trim();
+    const senha = campoSenha.value;
+    if (!usuario || !senha) { mostrarErro('Preencha o usuário e a senha.'); return; }
+
+    erroBox.classList.remove('show');
+    btn.disabled = true;
+    btn.textContent = 'Entrando…';
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ usuario, senha }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        mostrarErro(data.error || 'Não foi possível entrar.');
+        campoSenha.value = '';
+        campoSenha.focus();
+        return;
+      }
+      window.location.href = '/';
+    } catch (e) {
+      mostrarErro('Sem conexão com o servidor da loja.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Entrar';
+    }
+  }
+
+  btn.addEventListener('click', entrar);
+  [campoUsuario, campoSenha].forEach((el) => {
+    el.addEventListener('keydown', (e) => { if (e.key === 'Enter') entrar(); });
+  });
+
+  campoUsuario.focus();
+})();
+
+// Identidade do grupo (nome, subtítulo e logo) vem do servidor: trocar em Configurações
+// muda a tela de login também, sem mexer em código.
+(async function () {
+  try {
+    const r = await fetch('/api/grupo');
+    if (!r.ok) return;
+    const g = await r.json();
+    const marca = g.login || { nome: g.nome, subtitulo: g.subtitulo, logo: g.logo };
+    if (marca.nome) {
+      const el = document.getElementById('marcaNome');
+      el.textContent = marca.nome;
+      document.title = 'Entrar · ' + marca.nome;
+    }
+    if (marca.subtitulo) {
+      const sub = document.getElementById('marcaSub');
+      if (sub) sub.textContent = marca.subtitulo;
+    }
+    if (marca.logo) {
+      const img = document.querySelector('.brand img');
+      if (img) { img.src = marca.logo; img.alt = 'Logo ' + (marca.nome || 'SMG'); }
+    }
+  } catch (e) { /* mantém o que está na tela */ }
+})();
+</script>
+</body>
+</html>

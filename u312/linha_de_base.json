@@ -1,0 +1,148 @@
+{
+  "geradoEm": "2026-10-15T18:33:23.518Z",
+  "versao": "1.1.0",
+  "node": "v26.5.1",
+  "observacao": "Linha de base das rotas GET: guarda status e SHA-256 do corpo (sem conteudo). Serve para comparar depois e ver o que mudou.",
+  "rotas": [
+    {
+      "metodo": "GET",
+      "rota": "/health",
+      "acesso": "sem-login",
+      "status": 200,
+      "statusEsperado": 200,
+      "ok": true,
+      "bytes": 47,
+      "sha256": "1e94f5e53c595280fbaab0e08cace3ea46de74821b94643a9c839eb71685d3d5"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/login.html",
+      "acesso": "sem-login",
+      "status": 200,
+      "statusEsperado": 200,
+      "ok": true,
+      "bytes": 23351,
+      "sha256": "b23fe5b441643d6ca9ddee32989818600e33d3986673624f833e92b93f1c7ebd"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/",
+      "acesso": "sem-login",
+      "status": 302,
+      "statusEsperado": 302,
+      "ok": true,
+      "bytes": 33,
+      "sha256": "74d0e7f3e17dd27b984181dfd28e5221b43ca192ab755c9328dc5dc01452d6f1"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/index.html",
+      "acesso": "sem-login",
+      "status": 302,
+      "statusEsperado": 302,
+      "ok": true,
+      "bytes": 33,
+      "sha256": "74d0e7f3e17dd27b984181dfd28e5221b43ca192ab755c9328dc5dc01452d6f1"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/data.json",
+      "acesso": "sem-login",
+      "status": 404,
+      "statusEsperado": 404,
+      "ok": true,
+      "bytes": 148,
+      "sha256": "4d380fbff3f45819b1f8f82723bb14b137228d9bc3648e82fb6ba5b81ca1c4df"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/backups/data-0000.json",
+      "acesso": "sem-login",
+      "status": 404,
+      "statusEsperado": 404,
+      "ok": true,
+      "bytes": 161,
+      "sha256": "8177dea76ef9cc557e0d33b66df194113ebc3581e154813786f8fed2c9e8554d"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/state",
+      "acesso": "com-login",
+      "status": 200,
+      "statusEsperado": 200,
+      "ok": true,
+      "bytes": 89,
+      "sha256": "e98bb4224a6a6cc067a2102a9fd5b25da6de055846448afd41273784eda89747"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/eu",
+      "acesso": "com-login",
+      "status": 200,
+      "statusEsperado": 200,
+      "ok": true,
+      "bytes": 210,
+      "sha256": "16bc7b6e2fdbf5d551bf941a247f61838b0be9553584f7f93ded4efc3d19c612"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/usuarios",
+      "acesso": "com-login",
+      "status": 200,
+      "statusEsperado": 200,
+      "ok": true,
+      "bytes": 174,
+      "sha256": "55ef3f7ea3f351a15c2b0c886214405af6db0dd2f35e5fdfe9bb4d01faeb71f0"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/auditoria",
+      "acesso": "com-login",
+      "status": 200,
+      "statusEsperado": 200,
+      "ok": true,
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/auditoria?limit=5",
+      "acesso": "com-login",
+      "status": 200,
+      "statusEsperado": 200,
+      "ok": true,
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/backups",
+      "acesso": "com-login",
+      "status": 200,
+      "statusEsperado": 200,
+      "ok": true,
+      "bytes": 84,
+      "sha256": "dc2e3dd14136c62f42372bf5cd55c4743f33af9722573ed2b23b66f38e15b54c"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/diagnostico",
+      "acesso": "com-login",
+      "status": 200,
+      "statusEsperado": 200,
+      "ok": true,
+      "bytes": 574,
+      "sha256": "8d2b7e26581e41ec11289fe3ad02b01a828bdb2cb720220e4740a8bacd5799e4"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/rota-inexistente",
+      "acesso": "com-login",
+      "status": 404,
+      "statusEsperado": 404,
+      "ok": true,
+      "bytes": 33,
+      "sha256": "500c59780f14248b588400ea0e7d5a5fcc88dcd68b64743d96d8af1099a73cef"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "unicar-estoque-pneus-lan",
+  "version": "3.0.12",
+  "description": "Sistema de controle de estoque de pneus do SMG GROUP, para rodar na rede local (LAN).",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test testes/*.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.24",
+    "express": "^4.19.2",
+    "pdfkit": "^0.20.2",
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.7.5",
+    "tesseract.js": "^7.0.0"
+  }
+}
